@@ -1,0 +1,32 @@
+﻿namespace TonSdk.Interop.Enums
+{
+    public enum ErrorCode : uint
+    {
+        Unknown,
+        NotImplemented,
+        InvalidHex,
+        InvalidBase64,
+        InvalidAddress,
+        CallbackParamsCantBeConvertedToJson,
+        WebsocketConnectError,
+        WebsocketReceiveError,
+        WebsocketSendError,
+        HttpClientCreateError,
+        HttpRequestCreateError,
+        HttpRequestSendError,
+        HttpRequestParseError,
+        CallbackNotRegistered,
+        NetModuleNotInit,
+        InvalidConfig,
+        CannotCreateRuntime,
+        InvalidContextHandle,
+        CannotSerializeResult,
+        CannotSerializeError,
+        CannotConvertJsValueToJson,
+        CannotReceiveSpawnedResult,
+        SetTimerError,
+        InvalidParams,
+        ContractsAddressConversionFailed,
+        UnknownFunction,
+    }
+}
