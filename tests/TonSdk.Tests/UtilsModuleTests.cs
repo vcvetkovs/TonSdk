@@ -29,7 +29,7 @@ namespace TonSdk.Tests
         [InlineData(Accounts.Base64Url)]
         [InlineData(Accounts.Hex)]
         [InlineData(Accounts.HexWorkchain0)]
-        public async Task ConvertAddressToAccountId_ValidAccountConversion_True(string inputAddress)
+        public async Task ConvertAddressToAccountId_ValidAccountConversion_IsAccountIdAddress(string inputAddress)
         {
             // Act
             var convertedAddress = await _sut
@@ -43,7 +43,7 @@ namespace TonSdk.Tests
         [InlineData(Accounts.Base64)]
         [InlineData(Accounts.Base64Url)]
         [InlineData(Accounts.Hex)]
-        public async Task ConvertAddressToHex_ValidAccountConversion_True(string inputAddress)
+        public async Task ConvertAddressToHex_ValidAccountConversion_IsHexAddress(string inputAddress)
         {
             // Act
             var convertedAddress = await _sut
@@ -57,7 +57,7 @@ namespace TonSdk.Tests
         [InlineData(Accounts.Base64)]
         [InlineData(Accounts.Base64Url)]
         [InlineData(Accounts.Hex)]
-        public async Task ConvertAddressToBase64_AllFalse_True(string inputAddress)
+        public async Task ConvertAddressToBase64_DefaultOptionsAndValidAccountConversion_IsBase64Address(string inputAddress)
         {
             // Act
             var convertedAddress = await _sut
@@ -71,7 +71,7 @@ namespace TonSdk.Tests
         [InlineData(Accounts.Base64)]
         [InlineData(Accounts.Base64Url)]
         [InlineData(Accounts.Hex)]
-        public async Task ConvertAddressToBase64_AllTrue_True(string inputAddress)
+        public async Task ConvertAddressToBase64_NotDefaultOptionsAndValidAccountConversion_IsBase64Address(string inputAddress)
         {
             // Act
             var convertedAddress = await _sut
