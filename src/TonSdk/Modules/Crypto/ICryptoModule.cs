@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Text.Json;
+using System.Threading.Tasks;
 using TonSdk.Modules.Crypto.Models;
 
 namespace TonSdk.Modules.Crypto
@@ -210,5 +212,35 @@ namespace TonSdk.Modules.Crypto
         /// Extracts the public Task<key> from the serialized extended private key.
         /// </summary>
         public Task<ResultOfHDKeyPublicFromXPrv> HDKeyPublicFromXPrv(ParamsOfHDKeyPublicFromXPrv @params);
+
+        /// <summary>
+        /// Performs symmetric `chacha20` encryption.
+        /// </summary>
+        public Task<ResultOfHDKeyPublicFromXPrv> Chacha20(ParamsOfHDKeyPublicFromXPrv @params);
+
+        /// <summary>
+        /// Register an application implemented signing box.
+        /// </summary>
+        public Task<RegisteredSigningBox> RegisterSigningBox(Action<JsonElement, uint> appObject = null);
+
+        /// <summary>
+        /// Creates a default signing box implementation.
+        /// </summary>
+        public Task<RegisteredSigningBox> GetSigningBox(KeyPair @params);
+
+        /// <summary>
+        /// Returns public key of signing key pair.
+        /// </summary>
+        public Task<ResultOfSigningBoxGetPublicKey> SigningBoxGetPublicKey(RegisteredSigningBox @params);
+
+        /// <summary>
+        /// Returns signed user data.
+        /// </summary>
+        public Task<ResultOfSigningBoxSign> SigningBoxSign(ParamsOfSigningBoxSign @params);
+
+        /// <summary>
+        /// Removes signing box from SDK.
+        /// </summary>
+        public Task RemoveSigningBox(RegisteredSigningBox @params);
     }
 }

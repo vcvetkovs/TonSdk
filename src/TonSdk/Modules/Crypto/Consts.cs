@@ -35,6 +35,12 @@
             public const string HDKeyDeriveFromXPrvPath = "crypto.hdkey_derive_from_xprv_path";
             public const string HDKeySecretFromXPrv = "crypto.hdkey_secret_from_xprv";
             public const string HDKeyPublicFromXPrv = "crypto.hdkey_public_from_xprv";
+            public const string Chacha20 = "crypto.chacha20";
+            public const string RegisterSigningBox = "crypto.register_signing_box";
+            public const string GetSigningBox = "crypto.get_signing_box";
+            public const string SigningBoxGetPublicKey = "crypto.signing_box_get_public_key";
+            public const string SigningBoxSign = "crypto.signing_box_sign";
+            public const string RemoveSigningBox = "crypto.remove_signing_box";
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Text.Json;
+using System.Threading.Tasks;
 using TonSdk.Modules.Crypto.Models;
 
 namespace TonSdk.Modules.Crypto
@@ -148,34 +150,59 @@ namespace TonSdk.Modules.Crypto
             return _client.CallFunction<KeyPair>(Consts.Commands.MnemonicDeriveSignKeys, @params);
         }
 
-        public Task<ResultOfHDKeyXPrvFromMnemonic> HDKeyXPrvFromMnemonic(
-            ParamsOfHDKeyXPrvFromMnemonic @params)
+        public Task<ResultOfHDKeyXPrvFromMnemonic> HDKeyXPrvFromMnemonic(ParamsOfHDKeyXPrvFromMnemonic @params)
         {
             return _client.CallFunction<ResultOfHDKeyXPrvFromMnemonic>(Consts.Commands.HDKeyXPrvFromMnemonic, @params);
         }
 
-        public Task<ResultOfHDKeyDeriveFromXPrv> HDKeyDeriveFromXPrv(
-            ParamsOfHDKeyDeriveFromXPrv @params)
+        public Task<ResultOfHDKeyDeriveFromXPrv> HDKeyDeriveFromXPrv(ParamsOfHDKeyDeriveFromXPrv @params)
         {
             return _client.CallFunction<ResultOfHDKeyDeriveFromXPrv>(Consts.Commands.HDKeyDeriveFromXPrv, @params);
         }
 
-        public Task<ResultOfHDKeyDeriveFromXPrvPath> HDKeyDeriveFromXPrvPath(
-            ParamsOfHDKeyDeriveFromXPrvPath @params)
+        public Task<ResultOfHDKeyDeriveFromXPrvPath> HDKeyDeriveFromXPrvPath(ParamsOfHDKeyDeriveFromXPrvPath @params)
         {
             return _client.CallFunction<ResultOfHDKeyDeriveFromXPrvPath>(Consts.Commands.HDKeyDeriveFromXPrvPath, @params);
         }
 
-        public Task<ResultOfHDKeySecretFromXPrv> HDKeySecretFromXPrv(
-            ParamsOfHDKeySecretFromXPrv @params)
+        public Task<ResultOfHDKeySecretFromXPrv> HDKeySecretFromXPrv(ParamsOfHDKeySecretFromXPrv @params)
         {
             return _client.CallFunction<ResultOfHDKeySecretFromXPrv>(Consts.Commands.HDKeySecretFromXPrv, @params);
         }
 
-        public Task<ResultOfHDKeyPublicFromXPrv> HDKeyPublicFromXPrv(
-            ParamsOfHDKeyPublicFromXPrv @params)
+        public Task<ResultOfHDKeyPublicFromXPrv> HDKeyPublicFromXPrv(ParamsOfHDKeyPublicFromXPrv @params)
         {
             return _client.CallFunction<ResultOfHDKeyPublicFromXPrv>(Consts.Commands.HDKeyPublicFromXPrv, @params);
+        }
+
+        public Task<ResultOfHDKeyPublicFromXPrv> Chacha20(ParamsOfHDKeyPublicFromXPrv @params)
+        {
+            return _client.CallFunction<ResultOfHDKeyPublicFromXPrv>(Consts.Commands.Chacha20, @params);
+        }
+
+        public Task<RegisteredSigningBox> RegisterSigningBox(Action<JsonElement, uint> appObject = null)
+        {
+            return _client.CallFunction<RegisteredSigningBox>(Consts.Commands.RegisterSigningBox, appObject);
+        }
+
+        public Task<RegisteredSigningBox> GetSigningBox(KeyPair @params)
+        {
+            return _client.CallFunction<RegisteredSigningBox>(Consts.Commands.GetSigningBox, @params);
+        }
+
+        public Task<ResultOfSigningBoxGetPublicKey> SigningBoxGetPublicKey(RegisteredSigningBox @params)
+        {
+            return _client.CallFunction<ResultOfSigningBoxGetPublicKey>(Consts.Commands.SigningBoxGetPublicKey, @params);
+        }
+
+        public Task<ResultOfSigningBoxSign> SigningBoxSign(ParamsOfSigningBoxSign @params)
+        {
+            return _client.CallFunction<ResultOfSigningBoxSign>(Consts.Commands.SigningBoxSign, @params);
+        }
+
+        public Task RemoveSigningBox(RegisteredSigningBox @params)
+        {
+            return _client.CallFunction<RegisteredSigningBox>(Consts.Commands.RemoveSigningBox, @params);
         }
     }
 }
