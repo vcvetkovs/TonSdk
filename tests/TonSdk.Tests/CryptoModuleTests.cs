@@ -18,7 +18,7 @@ namespace TonSdk.Tests
                 public const string DerivedFromXprv = "xprv9uZwtSeoKf1swgAkVVCEUmC2at6t7MCJoHnBbn1MWJZyxQ4cySkVXPyNh7zjf9VjsP4vEHDDD2a6R35cHubg4WpzXRzniYiy8aJh1gNnBKv";
                 public const string DerivedFromXprvPath = "xprvA1KNMo63UcGjmDF1bX39Cw2BXGUwrwMjeD5qvQ3tA3qS3mZQkGtpf4DHq8FDLKAvAjXsYGLHDP2dVzLu9ycta8PXLuSYib2T3vzLf3brVgZ";
                 public const string SecretFromXprv = "0c91e53128fa4d67589d63a6c44049c1068ec28a63069a55ca3de30c57f8b365";
-                public const string PublicFromXprv = "02a8eb63085f73c33fa31b4d1134259406347284f8dab6fc68f4bf8c96f6c39b75";
+                public const string PublicFromXprv = "7b70008d0c40992283d488b1046739cf827afeabf647a5f07c4ad1e7e45a6f89";
             }
         }
 

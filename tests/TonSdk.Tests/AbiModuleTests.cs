@@ -3,7 +3,7 @@ using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using TonSdk.Common.Transformers;
+using TonSdk.Common.Converters;
 using TonSdk.Modules.Abi;
 using TonSdk.Modules.Abi.Enums;
 using TonSdk.Modules.Abi.Models;
@@ -141,7 +141,7 @@ namespace TonSdk.Tests
         public async Task EncodeMessage_DeploySignerExternal_True()
         {
             // Arrange
-            var @params = DeployParams(new SignerExternal
+            var @params = DeployParams(new Signer.External
             {
                 PublicKey = TestData.Keys.Public
             });
@@ -159,9 +159,9 @@ namespace TonSdk.Tests
         public async Task EncodeMessage_DeploySignerKeys_True()
         {
             // Arrange
-            var @params = DeployParams(new SignerKeys
+            var @params = DeployParams(new Signer.Keys
             {
-                Keys = TestData.Keys
+                KeyPair = TestData.Keys
             });
 
             // Act
@@ -177,7 +177,7 @@ namespace TonSdk.Tests
         public async Task EncodeMessage_RunSignerExternal_True()
         {
             // Arrange
-            var @params = RunParams(new SignerExternal
+            var @params = RunParams(new Signer.External
             {
                 PublicKey = TestData.Keys.Public
             });
@@ -195,9 +195,9 @@ namespace TonSdk.Tests
         public async Task EncodeMessage_RunSignerKeys_True()
         {
             // Arrange
-            var @params = RunParams(new SignerKeys
+            var @params = RunParams(new Signer.Keys
             {
-                Keys = TestData.Keys
+                KeyPair = TestData.Keys
             });
 
             // Act
@@ -213,7 +213,7 @@ namespace TonSdk.Tests
         public async Task EncodeMessage_RunExternalSigner_True()
         {
             // Arrange
-            var @params = RunParams(new SignerNone());
+            var @params = RunParams(new Signer.None());
 
             // Act
             var result = await _sut.EncodeMessage(@params);
@@ -224,9 +224,9 @@ namespace TonSdk.Tests
                 result.Message);
         }
 
-        private ParamsOfEncodeMessage<TSigner> DeployParams<TSigner>(TSigner signer)
+        private ParamsOfEncodeMessage DeployParams(Signer signer)
         {
-            return new ParamsOfEncodeMessage<TSigner>
+            return new ParamsOfEncodeMessage
             {
                 Abi = TestData.Contracts.Events.Abi,
                 Address = null,
@@ -252,9 +252,9 @@ namespace TonSdk.Tests
             };
         }
 
-        private ParamsOfEncodeMessage<TSigner> RunParams<TSigner>(TSigner signer)
+        private ParamsOfEncodeMessage RunParams(Signer signer)
         {
-            return new ParamsOfEncodeMessage<TSigner>
+            return new ParamsOfEncodeMessage
             {
                 Abi = TestData.Contracts.Events.Abi,
                 Address = "0:05beb555e942fa744fd96f45a9ea9d0a8248208ca12421947c06e59bc997d309",
