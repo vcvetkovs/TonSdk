@@ -3,7 +3,7 @@
     public struct ResultOfHDKeyDeriveFromXPrvPath
     {
         /// <summary>
-        /// Derived serialized extended private key.s
+        ///     Derived serialized extended private keys.
         /// </summary>
         public string Xprv { get; set; }
     }

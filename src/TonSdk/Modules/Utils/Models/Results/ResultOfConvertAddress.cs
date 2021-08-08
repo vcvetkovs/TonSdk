@@ -3,7 +3,7 @@
     public struct ResultOfConvertAddress
     {
         /// <summary>
-        /// Address in the specified format.
+        ///     Address in the specified format.
         /// </summary>
         public string Address { get; set; }
     }

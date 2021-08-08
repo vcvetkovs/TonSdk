@@ -3,9 +3,11 @@
     public struct ParamsOfTonCrc16
     {
         /// <summary>
-        /// Input data for CRC calculation.
-        /// Encoded with `base64`.
+        ///     Input data for CRC calculation.
         /// </summary>
+        /// <remarks>
+        ///     Encoded with <c>base64</c>.
+        /// </remarks>
         public string Data { get; set; }
     }
 }

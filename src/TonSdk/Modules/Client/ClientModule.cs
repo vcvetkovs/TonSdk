@@ -12,28 +12,28 @@ namespace TonSdk.Modules.Client
             _client = client;
         }
 
-        /// <summary>
-        /// Returns Core Library API reference.
-        /// </summary>
         public Task<ResultOfGetApiReference> GetApiReference()
         {
             return _client
                 .CallFunction<ResultOfGetApiReference>(Consts.Commands.GetApiReference);
         }
 
-        /// <summary>
-        /// Returns Core Library version.
-        /// </summary>
-        public Task<ResultOfVersion> GetVersion()
+        public Task<ResultOfVersion> Version()
         {
             return _client
                 .CallFunction<ResultOfVersion>(Consts.Commands.Version);
         }
 
-        public Task<ResultOfBuildInfo> GetBuildInfo()
+        public Task<ResultOfBuildInfo> BuildInfo()
         {
             return _client
                 .CallFunction<ResultOfBuildInfo>(Consts.Commands.BuildInfo);
+        }
+
+        public Task ResolveAppRequest(ParamsOfResolveAppRequest @params)
+        {
+            return _client
+                .CallFunction(Consts.Commands.ResolveAppRequest);
         }
     }
 }

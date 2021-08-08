@@ -3,8 +3,11 @@
     public struct ResultOfNaclSignDetached
     {
         /// <summary>
-        /// Signature encoded in `hex`.s
+        ///     Signature.
         /// </summary>
+        /// <remarks>
+        ///     Encoded with <c>hex</c>.
+        /// </remarks>
         public string Signature { get; set; }
     }
 }

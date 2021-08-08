@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using TonSdk.Modules.Utils.Enums;
 using TonSdk.Modules.Utils.Models;
 
 namespace TonSdk.Modules.Utils
@@ -18,10 +17,7 @@ namespace TonSdk.Modules.Utils
             var @params = new ParamsOfConvertAddress
             {
                 Address = address,
-                OutputFormat = new Models.AddressStringFormat
-                {
-                    Type = AddressStringFormatType.AccountId
-                }
+                OutputFormat = new AddressStringFormat.AccountId()
             };
             return ConvertAddress(@params);
         }
@@ -31,10 +27,7 @@ namespace TonSdk.Modules.Utils
             var @params = new ParamsOfConvertAddress
             {
                 Address = address,
-                OutputFormat = new Models.AddressStringFormat
-                {
-                    Type = AddressStringFormatType.Hex
-                }
+                OutputFormat = new AddressStringFormat.Hex()
             };
             return ConvertAddress(@params);
         }
@@ -48,22 +41,45 @@ namespace TonSdk.Modules.Utils
             var @params = new ParamsOfConvertAddress
             {
                 Address = address,
-                OutputFormat = new Models.AddressStringFormat
+                OutputFormat = new AddressStringFormat.Base64
                 {
-                    Type = AddressStringFormatType.Base64,
                     Url = url,
-                    Test= test,
+                    Test = test,
                     Bounce = bounce
                 }
             };
             return ConvertAddress(@params);
         }
 
-        private async Task<string> ConvertAddress(ParamsOfConvertAddress @params)
+        public async Task<string> ConvertAddress(ParamsOfConvertAddress @params)
         {
             var resultOfConvertAddress = await _client
                 .CallFunction<ResultOfConvertAddress>(Consts.Commands.ConvertAddress, @params);
             return resultOfConvertAddress.Address;
+        }
+
+        public Task<ResultOfGetAddressType> GetAddressType(ParamsOfGetAddressType @params)
+        {
+            return _client
+                .CallFunction<ResultOfGetAddressType>(Consts.Commands.GetAddressType, @params);
+        }
+
+        public Task<ResultOfCalcStorageFee> CalcStorageFee(ParamsOfCalcStorageFee @params)
+        {
+            return _client
+                .CallFunction<ResultOfCalcStorageFee>(Consts.Commands.CalcStorageFee, @params);
+        }
+
+        public Task<ResultOfCompressZstd> CompressZstd(ParamsOfCompressZstd @params)
+        {
+            return _client
+                .CallFunction<ResultOfCompressZstd>(Consts.Commands.CompressZstd, @params);
+        }
+
+        public Task<ResultOfDecompressZstd> DecompressZstd(ParamsOfDecompressZstd @params)
+        {
+            return _client
+                .CallFunction<ResultOfDecompressZstd>(Consts.Commands.DecompressZstd, @params);
         }
     }
 }

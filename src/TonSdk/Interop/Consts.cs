@@ -2,6 +2,6 @@
 {
     public class Consts
     {
-        public const string LibPath = "Interop/ton_client";
+        public const string DllName = "ton_client";
     }
 }

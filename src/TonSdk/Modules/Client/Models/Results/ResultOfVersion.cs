@@ -3,7 +3,7 @@
     public struct ResultOfVersion
     {
         /// <summary>
-        /// Core Library version.
+        ///     Core Library version.
         /// </summary>
         public string Version { get; set; }
     }

@@ -3,7 +3,7 @@
     public struct ResultOfMnemonicFromEntropy
     {
         /// <summary>
-        /// Phrase.
+        ///     Phrase.
         /// </summary>
         public string Phrase { get; set; }
     }

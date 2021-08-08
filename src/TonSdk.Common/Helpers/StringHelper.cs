@@ -1,123 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 
 namespace TonSdk.Common.Helpers
 {
-    internal static class StringHelper
+    public static class StringHelper
     {
-        public static bool IsNullOrEmpty(string? value)
-        {
-            return string.IsNullOrEmpty(value);
-        }
-
-        public static string FormatWith(this string format, IFormatProvider provider, object? arg0)
-        {
-            return format.FormatWith(provider, new object?[] { arg0 });
-        }
-
-        public static string FormatWith(this string format, IFormatProvider provider, object? arg0, object? arg1)
-        {
-            return format.FormatWith(provider, new object?[] { arg0, arg1 });
-        }
-
-        public static string FormatWith(this string format, IFormatProvider provider, object? arg0, object? arg1, object? arg2)
-        {
-            return format.FormatWith(provider, new object?[] { arg0, arg1, arg2 });
-        }
-
-        public static string FormatWith(this string format, IFormatProvider provider, object? arg0, object? arg1, object? arg2, object? arg3)
-        {
-            return format.FormatWith(provider, new object?[] { arg0, arg1, arg2, arg3 });
-        }
-
-        private static string FormatWith(this string format, IFormatProvider provider, params object?[] args)
-        {
-            // leave this a private to force code to use an explicit overload
-            // avoids stack memory being reserved for the object array
-            //ValidationUtils.ArgumentNotNull(format, nameof(format));
-
-            return string.Format(provider, format, args);
-        }
-
-        /// <summary>
-        /// Determines whether the string is all white space. Empty string will return <c>false</c>.
-        /// </summary>
-        /// <param name="s">The string to test whether it is all white space.</param>
-        /// <returns>
-        /// 	<c>true</c> if the string is all white space; otherwise, <c>false</c>.
-        /// </returns>
-        public static bool IsWhiteSpace(string s)
-        {
-            if (s == null)
-            {
-                throw new ArgumentNullException(nameof(s));
-            }
-
-            if (s.Length == 0)
-            {
-                return false;
-            }
-
-            for (int i = 0; i < s.Length; i++)
-            {
-                if (!char.IsWhiteSpace(s[i]))
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        public static StringWriter CreateStringWriter(int capacity)
-        {
-            StringBuilder sb = new StringBuilder(capacity);
-            StringWriter sw = new StringWriter(sb, CultureInfo.InvariantCulture);
-
-            return sw;
-        }
-
-        //public static void ToCharAsUnicode(char c, char[] buffer)
-        //{
-        //    buffer[0] = '\\';
-        //    buffer[1] = 'u';
-        //    buffer[2] = MathUtils.IntToHex((c >> 12) & '\x000f');
-        //    buffer[3] = MathUtils.IntToHex((c >> 8) & '\x000f');
-        //    buffer[4] = MathUtils.IntToHex((c >> 4) & '\x000f');
-        //    buffer[5] = MathUtils.IntToHex(c & '\x000f');
-        //}
-
-        public static TSource ForgivingCaseSensitiveFind<TSource>(this IEnumerable<TSource> source, Func<TSource, string> valueSelector, string testValue)
-        {
-            if (source == null)
-            {
-                throw new ArgumentNullException(nameof(source));
-            }
-            if (valueSelector == null)
-            {
-                throw new ArgumentNullException(nameof(valueSelector));
-            }
-
-            IEnumerable<TSource> caseInsensitiveResults = source.Where(s => string.Equals(valueSelector(s), testValue, StringComparison.OrdinalIgnoreCase));
-            if (caseInsensitiveResults.Count() <= 1)
-            {
-                return caseInsensitiveResults.SingleOrDefault();
-            }
-            else
-            {
-                // multiple results returned. now filter using case sensitivity
-                IEnumerable<TSource> caseSensitiveResults = source.Where(s => string.Equals(valueSelector(s), testValue, StringComparison.Ordinal));
-                return caseSensitiveResults.SingleOrDefault();
-            }
-        }
-
         public static string ToCamelCase(string s)
         {
-            if (StringHelper.IsNullOrEmpty(s) || !char.IsUpper(s[0]))
+            if (string.IsNullOrEmpty(s) || !char.IsUpper(s[0]))
             {
                 return s;
             }
@@ -180,7 +69,7 @@ namespace TonSdk.Common.Helpers
 
         private static string ToSeparatedCase(string s, char separator)
         {
-            if (IsNullOrEmpty(s))
+            if (string.IsNullOrEmpty(s))
             {
                 return s;
             }
@@ -246,72 +135,6 @@ namespace TonSdk.Common.Helpers
             }
 
             return sb.ToString();
-        }
-
-        public static bool IsHighSurrogate(char c)
-        {
-#if HAVE_UNICODE_SURROGATE_DETECTION
-            return char.IsHighSurrogate(c);
-#else
-            return (c >= 55296 && c <= 56319);
-#endif
-        }
-
-        public static bool IsLowSurrogate(char c)
-        {
-#if HAVE_UNICODE_SURROGATE_DETECTION
-            return char.IsLowSurrogate(c);
-#else
-            return (c >= 56320 && c <= 57343);
-#endif
-        }
-
-        public static bool StartsWith(this string source, char value)
-        {
-            return (source.Length > 0 && source[0] == value);
-        }
-
-        public static bool EndsWith(this string source, char value)
-        {
-            return (source.Length > 0 && source[source.Length - 1] == value);
-        }
-
-        public static string Trim(this string s, int start, int length)
-        {
-            // References: https://referencesource.microsoft.com/#mscorlib/system/string.cs,2691
-            // https://referencesource.microsoft.com/#mscorlib/system/string.cs,1226
-            if (s == null)
-            {
-                throw new ArgumentNullException();
-            }
-            if (start < 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(start));
-            }
-            if (length < 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(length));
-            }
-            int end = start + length - 1;
-            if (end >= s.Length)
-            {
-                throw new ArgumentOutOfRangeException(nameof(length));
-            }
-            for (; start < end; start++)
-            {
-                if (!char.IsWhiteSpace(s[start]))
-                {
-                    break;
-                }
-            }
-            for (; end >= start; end--)
-            {
-                if (!char.IsWhiteSpace(s[end]))
-                {
-                    break;
-                }
-            }
-            return s.Substring(start, end - start + 1);
         }
     }
 }

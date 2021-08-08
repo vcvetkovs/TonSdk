@@ -1,20 +1,29 @@
 ﻿namespace TonSdk.Modules.Crypto.Models
 {
-    public struct ParamsOfConvertPublicKeyToTonSafeFormat
+    public struct ParamsOfChacha20
     {
         /// <summary>
-        /// Must be encoded with `base64`.
+        ///     Source data to be encrypted or decrypted.
         /// </summary>
+        /// <remarks>
+        ///     Must be encoded with <c>base64</c>.
+        /// </remarks>
         public string Data { get; set; }
 
         /// <summary>
-        /// Must be encoded with `hex`.
+        ///     256-bit key.
         /// </summary>
+        /// <remarks>
+        ///     Must be encoded with <c>hex</c>.
+        /// </remarks>
         public string Key { get; set; }
 
         /// <summary>
-        /// Must be encoded with `hex`.
+        ///     96-bit nonce.
         /// </summary>
+        /// <remarks>
+        ///     Must be encoded with <c>hex</c>.
+        /// </remarks>
         public string Nonce { get; set; }
     }
 }

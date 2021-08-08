@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using TonSdk.Common;
-using TonSdk.Common.Transformers;
+using TonSdk.Common.Converters;
 using TonSdk.Configs;
 using TonSdk.Exceptions;
 using TonSdk.Interop;
@@ -14,11 +15,11 @@ using TonSdk.Modules.Abi;
 using TonSdk.Modules.Boc;
 using TonSdk.Modules.Client;
 using TonSdk.Modules.Crypto;
+using TonSdk.Modules.Debot;
 using TonSdk.Modules.Net;
 using TonSdk.Modules.Processing;
 using TonSdk.Modules.Tvm;
 using TonSdk.Modules.Utils;
-using TonSdk.Transformers;
 
 namespace TonSdk
 {
@@ -28,15 +29,18 @@ namespace TonSdk
 
         private uint _requestIndex;
 
+        public const int DefaultAbiVersion = 2;
+
         public readonly JsonSerializerOptions JsonSerializerOptions;
-        public readonly IAbiModule Abi;
-        public readonly IBocModule Boc;
-        public readonly IClientModule Client;
-        public readonly ICryptoModule Crypto;
-        public readonly INetModule Net;
-        public readonly IProcessingModule Processing;
-        public readonly ITvmModule Tvm;
-        public readonly IUtilsModule Utils;
+        public IAbiModule Abi { get; set; }
+        public IBocModule Boc { get; set; }
+        public IClientModule Client { get; set; }
+        public ICryptoModule Crypto { get; set; }
+        public IDebotModule Debot { get; set; }
+        public INetModule Net { get; set; }
+        public IProcessingModule Processing { get; set; }
+        public ITvmModule Tvm { get; set; }
+        public IUtilsModule Utils { get; set; }
 
         public TonClient(
             ClientConfig? clientConfig = null,
@@ -44,6 +48,7 @@ namespace TonSdk
             IBocModule? bocModule = null,
             IClientModule? clientModule = null,
             ICryptoModule? cryptoModule = null,
+            IDebotModule? debotModule = null,
             INetModule? netModule = null,
             IProcessingModule? processingModule = null,
             ITvmModule? tvmModule = null,
@@ -53,10 +58,9 @@ namespace TonSdk
             {
                 PropertyNameCaseInsensitive = true,
                 PropertyNamingPolicy = SnakeCaseNamingPolicy.Instance,
-                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+                MaxDepth = 1000
             };
-            JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-            JsonSerializerOptions.Converters.Add(new AbiJsonConverter());
             _context = CreateContext(clientConfig);
 
             Abi = abiModule ?? new AbiModule(this);
@@ -64,9 +68,14 @@ namespace TonSdk
             Client = clientModule ?? new ClientModule(this);
             Crypto = cryptoModule ?? new CryptoModule(this);
             Net = netModule ?? new NetModule(this);
-            Processing = new ProcessingModule(this);
+            Processing = processingModule ?? new ProcessingModule(this);
             Tvm = tvmModule ?? new TvmModule(this);
             Utils = utilsModule ?? new UtilsModule(this);
+        }
+
+        public Task CallFunction(string name, object? @params = null)
+        {
+            return CallFunction<string>(name, @params);
         }
 
         public Task<T> CallFunction<T>(string name, object? @params = null)
@@ -77,10 +86,25 @@ namespace TonSdk
         /// <summary>
         /// Makes 'tc_request' call to Free TON Sdk library and gets async response of it.
         /// </summary>
-        public Task<T> CallFunction<T, TCallback>(string name, object? @params = null, Action<TCallback, FunctionExecutionStatus> callback = null)
+        public Task<T> CallFunction<T, TCallback>(
+            string name,
+            object? @params = null,
+            Action<TCallback, FunctionExecutionStatus> callback = null,
+            Func<string, Task> func = null)
         {
             var result = new TaskCompletionSource<T>();
-            CallFunction<T>((requestId, resultJsonData, responseType, isFinished) =>
+            var callbackHandle = default(GCHandle);
+
+            var serializedParams = Serialize(@params) ?? "";
+            using var methodNameInteropString = InteropString.Create(name);
+            using var paramsJsonInteropString = InteropString.Create(serializedParams);
+            var tcs = new TaskCompletionSource<string>();
+            var handler = TonAdapter.tc_request(
+                _context,
+                methodNameInteropString,
+                paramsJsonInteropString,
+                ++_requestIndex,
+                (requestId, resultJsonData, responseType, isFinished) =>
                 {
                     try
                     {
@@ -108,9 +132,15 @@ namespace TonSdk
                     {
                         result.SetException(exception);
                     }
-                },
-                name,
-                @params);
+                    finally
+                    {
+                        if (isFinished && callbackHandle.IsAllocated)
+                        {
+                            callbackHandle.Free();
+                        }
+                    }
+                });
+            callbackHandle = GCHandle.Alloc(handler);
 
             return result.Task;
         }
@@ -122,7 +152,16 @@ namespace TonSdk
         {
             var tcs = new TaskCompletionSource<AsyncIterationItem<string>>();
             var successResult = default(T);
-            CallFunction<T>((requestId, resultJsonData, responseType, isFinished) =>
+            var serializedParams = Serialize(@params) ?? "";
+            using var methodNameInteropString = InteropString.Create(name);
+            using var paramsJsonInteropString = InteropString.Create(serializedParams);
+            var callbackHandle = default(GCHandle);
+            var handler = TonAdapter.tc_request(
+                _context,
+                methodNameInteropString,
+                paramsJsonInteropString,
+                ++_requestIndex,
+                (requestId, resultJsonData, responseType, isFinished) =>
                 {
                     try
                     {
@@ -156,9 +195,15 @@ namespace TonSdk
                     {
                         tcs.SetException(exception);
                     }
-                },
-                name,
-                @params);
+                    finally
+                    {
+                        if (isFinished && callbackHandle.IsAllocated)
+                        {
+                            callbackHandle.Free();
+                        }
+                    }
+                });
+            callbackHandle = GCHandle.Alloc(handler);
 
             var task = tcs.Task;
             var asyncDataCollection = new AsyncDataStream<string>(
@@ -199,21 +244,6 @@ namespace TonSdk
         public void Dispose()
         {
             TonAdapter.tc_destroy_context(_context);
-        }
-
-        private void CallFunction<T>(
-            TonAdapter.ResponseHandler responseHandler,
-            string name,
-            object? @params = null)
-        {
-            using var methodNameInteropString = InteropString.Create(name);
-            using var paramsJsonInteropString = InteropString.Create(Serialize(@params) ?? "");
-            TonAdapter.tc_request(
-                _context,
-                methodNameInteropString,
-                paramsJsonInteropString,
-                ++_requestIndex,
-                responseHandler);
         }
 
         private T DeserializeOrThrow<T>(InteropString interopString)

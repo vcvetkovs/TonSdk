@@ -1,9 +1,13 @@
-﻿namespace TonSdk.Modules.Abi.Models
+﻿using System.Text.Json.Serialization;
+using TonSdk.Common.Converters;
+
+namespace TonSdk.Modules.Abi.Models
 {
     public abstract class Abi
     {
         public class Contract : Abi
         {
+            [JsonConverter(typeof(PolymorphicTypeJsonConverter))]
             public AbiContract Value { get; set; }
         }
 
@@ -19,6 +23,7 @@
 
         public class Serialized : Abi
         {
+            [JsonConverter(typeof(PolymorphicTypeJsonConverter))]
             public AbiContract Value { get; set; }
         }
     }

@@ -3,8 +3,11 @@
     public struct ResultOfSigningBoxGetPublicKey
     {
         /// <summary>
-        /// Encoded with hex
+        ///     Public key of signing box.
         /// </summary>
+        /// <remarks>
+        ///     Encoded with <c>hex</c>.
+        /// </remarks>
         public string Pubkey { get; set; }
     }
 }

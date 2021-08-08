@@ -3,8 +3,11 @@
     public struct ResultOfVerifySignature
     {
         /// <summary>
-        /// Unsigned data encoded in `base64`.
+        ///     Unsigned data.
         /// </summary>
+        /// <remarks>
+        ///     Encoded with <c>base64</c>.
+        /// </remarks>
         public string Unsigned { get; set; }
     }
 }

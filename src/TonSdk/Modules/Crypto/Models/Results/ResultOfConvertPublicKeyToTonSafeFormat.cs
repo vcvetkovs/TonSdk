@@ -3,7 +3,7 @@
     public struct ResultOfConvertPublicKeyToTonSafeFormat
     {
         /// <summary>
-        /// Public key represented in TON safe format. 
+        ///     Public key represented in TON safe format. 
         /// </summary>
         public string TonPublicKey { get; set; }
     }

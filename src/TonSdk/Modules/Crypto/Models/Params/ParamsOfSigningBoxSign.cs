@@ -3,13 +3,13 @@
     public struct ParamsOfSigningBoxSign
     {
         /// <summary>
-        /// Signing Box handle.
+        ///     Signing Box handle.
         /// </summary>
         public uint SigningBox { get; set; }
 
-        /// <summary>
-        /// Must be encoded with `base64`.
-        /// </summary>
+        /// <remarks>
+        ///     Encoded with <c>base64</c>.
+        /// </remarks>
         public string Unsigned { get; set; }
     }
 }

@@ -75,6 +75,11 @@ namespace TonSdk.Modules.Crypto
             return _client.CallFunction<ResultOfScrypt>(Consts.Commands.Scrypt, @params);
         }
 
+        public Task<ResultOfNaclSignDetachedVerify> NaclSignDetachedVerify(ParamsOfNaclSignDetachedVerify @params)
+        {
+            return _client.CallFunction<ResultOfNaclSignDetachedVerify>(Consts.Commands.NaclSignDetachedVerify, @params);
+        }
+
         public Task<KeyPair> NaclSignKeypairFromSecretKey(ParamsOfNaclSignKeyPairFromSecret @params)
         {
             return _client.CallFunction<KeyPair>(Consts.Commands.NaclSignKeypairFromSecretKey, @params);
@@ -180,9 +185,9 @@ namespace TonSdk.Modules.Crypto
             return _client.CallFunction<ResultOfHDKeyPublicFromXPrv>(Consts.Commands.Chacha20, @params);
         }
 
-        public Task<RegisteredSigningBox> RegisterSigningBox(Action<JsonElement, uint> appObject = null)
+        public Task<RegisteredSigningBox> RegisterSigningBox(Action<JsonElement, uint> callback = null)
         {
-            return _client.CallFunction<RegisteredSigningBox>(Consts.Commands.RegisterSigningBox, appObject);
+            return _client.CallFunction<RegisteredSigningBox>(Consts.Commands.RegisterSigningBox, callback);
         }
 
         public Task<RegisteredSigningBox> GetSigningBox(KeyPair @params)
@@ -203,6 +208,31 @@ namespace TonSdk.Modules.Crypto
         public Task RemoveSigningBox(RegisteredSigningBox @params)
         {
             return _client.CallFunction<RegisteredSigningBox>(Consts.Commands.RemoveSigningBox, @params);
+        }
+
+        public async Task<RegisteredEncryptionBox> RegisterEncryptionBox(Func<ParamsOfAppEncryptionBox, Task<ResultOfAppEncryptionBox>> callback)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task RemoveEncryptionBox(RegisteredEncryptionBox @params)
+        {
+            await _client.CallFunction(Consts.Commands.RemoveEncryptionBox, @params);
+        }
+
+        public async Task<ResultOfEncryptionBoxGetInfo> EncryptionBoxGetInfo(ParamsOfEncryptionBoxGetInfo @params)
+        {
+            return await _client.CallFunction<ResultOfEncryptionBoxGetInfo>(Consts.Commands.EncryptionBoxGetInfo, @params);
+        }
+
+        public async Task<ResultOfEncryptionBoxEncrypt> EncryptionBoxEncrypt(ParamsOfEncryptionBoxEncrypt @params)
+        {
+            return await _client.CallFunction<ResultOfEncryptionBoxEncrypt>(Consts.Commands.EncryptionBoxEncrypt, @params);
+        }
+
+        public async Task<ResultOfEncryptionBoxDecrypt> EncryptionBoxDecrypt(ParamsOfEncryptionBoxDecrypt @params)
+        {
+            return await _client.CallFunction<ResultOfEncryptionBoxDecrypt>(Consts.Commands.EncryptionBoxDecrypt, @params);
         }
     }
 }

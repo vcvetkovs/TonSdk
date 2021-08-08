@@ -55,12 +55,6 @@
         Number
     }
 
-    //export type ApiConstValue =
-    //    { type: ApiConstValueIs.None } |
-    //    { type: ApiConstValueIs.Bool, value: string } |
-    //    { type: ApiConstValueIs.String, value: string } |
-    //    { type: ApiConstValueIs.Number, value: string };
-
     public class ApiConst : ApiItemDescription, IApiConst
     {
         public ApiConstValueIs Type { get; set; }

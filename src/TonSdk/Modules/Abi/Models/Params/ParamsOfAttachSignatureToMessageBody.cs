@@ -3,23 +3,26 @@
     public struct ParamsOfAttachSignatureToMessageBody
     {
         /// <summary>
-        /// Contract ABI.
+        ///     Contract ABI.
         /// </summary>
         public Abi Abi { get; set; }
 
-        /// <summary>
-        /// Public key. Must be encoded with `hex`.
-        /// </summary>
+        /// <remarks>
+        ///     Must be encoded with <c>hex</c>.
+        /// </remarks>
         public string PublicKey { get; set; }
 
         /// <summary>
-        /// Unsigned message BOC. Must be encoded with `base64`.
+        ///     Unsigned message body BOC.
         /// </summary>
+        /// <remarks>
+        ///     Must be encoded with <c>hex</c>.
+        /// </remarks>
         public string Message { get; set; }
 
-        /// <summary>
-        /// Signature. Must be encoded with `hex`.
-        /// </summary>
+        /// <remarks>
+        ///     Must be encoded with <c>hex</c>.
+        /// </remarks>
         public string Signature { get; set; }
     }
 }

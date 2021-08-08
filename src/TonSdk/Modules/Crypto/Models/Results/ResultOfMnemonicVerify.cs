@@ -3,7 +3,7 @@
     public struct ResultOfMnemonicVerify
     {
         /// <summary>
-        /// Flag indicating the mnemonic is valid or not.
+        ///     Flag indicating the mnemonic is valid or not.
         /// </summary>
         public bool Valid { get; set; }
     }

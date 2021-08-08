@@ -3,12 +3,12 @@
     public struct ParamsOfMnemonicFromRandom
     {
         /// <summary>
-        /// Dictionary identifier
+        ///     Dictionary identifier.
         /// </summary>
         public byte? Dictionary { get; set; }
 
         /// <summary>
-        /// Mnemonic word count.
+        ///     Mnemonic word count.
         /// </summary>
         public byte? WordCount { get; set; }
     }

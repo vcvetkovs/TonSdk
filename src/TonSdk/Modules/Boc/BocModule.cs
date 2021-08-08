@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using TonSdk.Modules.Boc.Models;
 
 namespace TonSdk.Modules.Boc
@@ -9,7 +10,7 @@ namespace TonSdk.Modules.Boc
 
         public BocModule(ITonClient client)
         {
-            _client = client;
+            _client = client ?? throw new ArgumentNullException(nameof(client));
         }
 
         public Task<ResultOfParse> ParseMessage(ParamsOfParse @params)
@@ -33,6 +34,11 @@ namespace TonSdk.Modules.Boc
         }
 
         public Task<ResultOfParse> ParseShardState(ParamsOfParseShardState @params)
+        {
+            return _client.CallFunction<ResultOfParse>(Consts.Commands.ParseShardState, @params);
+        }
+
+        public Task<ResultOfParse> ParseShardstate(ParamsOfParseShardState @params)
         {
             return _client.CallFunction<ResultOfParse>(Consts.Commands.ParseShardState, @params);
         }
