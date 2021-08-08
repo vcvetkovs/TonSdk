@@ -25,6 +25,12 @@ namespace TonSdk.Modules.Abi
                 .CallFunction<ResultOfAttachSignatureToMessageBody>(Consts.Commands.AttachSignatureToMessageBody, @params);
         }
 
+        public Task<ResultOfDecodeData> DecodeAccountData(ParamsOfDecodeAccountData @params)
+        {
+            return _client
+                .CallFunction<ResultOfDecodeData>(Consts.Commands.DecodeAccountData, @params);
+        }
+
         public Task<DecodedMessageBody> DecodeMessage(ParamsOfDecodeMessage @params)
         {
             return _client
@@ -43,17 +49,22 @@ namespace TonSdk.Modules.Abi
                 .CallFunction<ResultOfEncodeAccount>(Consts.Commands.EncodeAccount, @params);
         }
 
-        public Task<ResultOfEncodeMessageBody> EncodeMessageBody<TSigner>(
-            ParamsOfEncodeMessageBody<TSigner> @params)
+        public Task<ResultOfEncodeMessageBody> EncodeMessageBody(ParamsOfEncodeMessageBody @params)
         {
             return _client
                 .CallFunction<ResultOfEncodeMessageBody>(Consts.Commands.EncodeMessageBody, @params);
         }
 
-        public Task<ResultOfEncodeMessage> EncodeMessage<TSigner>(ParamsOfEncodeMessage<TSigner> @params)
+        public Task<ResultOfEncodeMessage> EncodeMessage(ParamsOfEncodeMessage @params)
         {
             return _client
                 .CallFunction<ResultOfEncodeMessage>(Consts.Commands.EncodeMessage, @params);
+        }
+
+        public Task<ResultOfEncodeInternalMessage> EncodeInternalMessage(ParamsOfEncodeInternalMessage @params)
+        {
+            return _client
+                .CallFunction<ResultOfEncodeInternalMessage>(Consts.Commands.EncodeInternalMessage, @params);
         }
     }
 }

@@ -3,12 +3,12 @@
     public struct ParamsOfSign
     {
         /// <summary>
-        /// Data that must be signed encoded in `base64`.
+        ///     Data that must be signed encoded in <c>base64</c>.
         /// </summary>
         public string Unsigned { get; set; }
 
         /// <summary>
-        /// Sign keys.
+        ///     Sign keys.
         /// </summary>
         public KeyPair Keys { get; set; }
     }

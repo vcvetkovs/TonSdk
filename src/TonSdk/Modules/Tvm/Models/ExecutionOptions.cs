@@ -2,16 +2,24 @@
 {
     public struct ExecutionOptions
     {
-        // BOC with config
+        /// <summary>
+        ///     BOC with config.
+        /// </summary>
         public string? BlockchainConfig { get; set; }
 
-        // Time that is used as transaction time
-        public int? BlockTime { get; set; }
+        /// <summary>
+        ///     Time that is used as transaction time
+        /// </summary>
+        public uint? BlockTime { get; set; }
 
-        // Block logical time
-        public double? BlockLt { get; set; }
+        /// <summary>
+        ///     Block logical time.
+        /// </summary>
+        public ulong? BlockLt { get; set; }
 
-        // Transaction logical time
-        public double? TransactionLt { get; set; }
+        /// <summary>
+        ///     Transaction logical time.
+        /// </summary>
+        public ulong? TransactionLt { get; set; }
     }
 }

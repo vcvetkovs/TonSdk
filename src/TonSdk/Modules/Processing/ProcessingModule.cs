@@ -26,10 +26,10 @@ namespace TonSdk.Modules.Processing
                 .CallFunction<ResultOfProcessMessage, T>(Consts.Commands.WaitForTransation, @params, callback);
         }
 
-        public Task<ResultOfProcessMessage> ProcessMessage<T, TSigner>(ParamsOfProcessMessage<TSigner> @params, Action<T, FunctionExecutionStatus> callback = null)
+        public Task<ResultOfProcessMessage> ProcessMessage(ParamsOfProcessMessage @params)
         {
             return _client
-                .CallFunction<ResultOfProcessMessage, T>(Consts.Commands.WaitForTransation, @params, callback);
+                .CallFunction<ResultOfProcessMessage>(Consts.Commands.ProcessMessage, @params);
         }
     }
 }

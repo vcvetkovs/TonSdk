@@ -3,8 +3,11 @@
     public struct ResultOfNaclBoxOpen
     {
         /// <summary>
-        /// Decrypted data encoded in `base64`.
+        ///     Decrypted data.
         /// </summary>
+        /// <remarks>
+        ///     Encoded with <c>base64</c>.
+        /// </remarks>
         public string Decrypted { get; set; }
     }
 }

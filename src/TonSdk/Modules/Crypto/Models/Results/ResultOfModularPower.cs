@@ -3,7 +3,7 @@
     public struct ResultOfModularPower
     {
         /// <summary>
-        /// Result of modular exponentiation.
+        ///     Result of modular exponentiation.
         /// </summary>
         public string ModularPower { get; set; }
     }

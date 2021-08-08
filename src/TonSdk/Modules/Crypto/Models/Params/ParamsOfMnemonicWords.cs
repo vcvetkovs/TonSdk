@@ -3,7 +3,7 @@
     public struct ParamsOfMnemonicWords
     {
         /// <summary>
-        /// Dictionary identifier.
+        ///     Dictionary identifier.
         /// </summary>
         public byte? Dictionary { get; set; }
     }

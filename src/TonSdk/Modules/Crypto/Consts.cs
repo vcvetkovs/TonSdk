@@ -15,6 +15,7 @@
             public const string Sha256 = "crypto.sha256";
             public const string Sha512 = "crypto.sha512";
             public const string Scrypt = "crypto.scrypt";
+            public const string NaclSignDetachedVerify = "crypto.nacl_sign_detached_verify";
             public const string NaclSignKeypairFromSecretKey = "crypto.nacl_sign_keypair_from_secret_key";
             public const string NaclSign = "crypto.nacl_sign";
             public const string NaclSignOpen = "crypto.nacl_sign_open";
@@ -41,6 +42,11 @@
             public const string SigningBoxGetPublicKey = "crypto.signing_box_get_public_key";
             public const string SigningBoxSign = "crypto.signing_box_sign";
             public const string RemoveSigningBox = "crypto.remove_signing_box";
+            public const string RegisterEncryptionBox = "crypto.register_encryption_box";
+            public const string RemoveEncryptionBox = "crypto.remove_encryption_box";
+            public const string EncryptionBoxGetInfo = "crypto.encryption_box_get_info";
+            public const string EncryptionBoxEncrypt = "crypto.encryption_box_encrypt";
+            public const string EncryptionBoxDecrypt = "crypto.encryption_box_decrypt";
         }
     }
 }

@@ -6,6 +6,6 @@
 
         public AbiParameter[] Inputs { get; set; }
 
-        public uint? Id { get; set; }
+        public string? Id { get; set; }
     }
 }

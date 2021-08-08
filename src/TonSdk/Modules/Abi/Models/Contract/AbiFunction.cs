@@ -8,6 +8,6 @@
 
         public AbiParameter[] Outputs { get; set; }
 
-        public uint? Id { get; set; }
+        public string? Id { get; set; }
     }
 }

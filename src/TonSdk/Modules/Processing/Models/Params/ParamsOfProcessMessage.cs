@@ -2,15 +2,15 @@
 
 namespace TonSdk.Modules.Processing.Models
 {
-    public struct ParamsOfProcessMessage<TSigner>
+    public struct ParamsOfProcessMessage
     {
         /// <summary>
-        /// Message encode parameters.
+        ///     Message encode parameters.
         /// </summary>
-        public ParamsOfEncodeMessage<TSigner> MessageEncodeParams { get; set; }
+        public ParamsOfEncodeMessage MessageEncodeParams { get; set; }
 
         /// <summary>
-        /// Flag for requesting events sending.
+        ///     Flag for requesting events sending.
         /// </summary>
         public bool SendEvents { get; set; }
     }

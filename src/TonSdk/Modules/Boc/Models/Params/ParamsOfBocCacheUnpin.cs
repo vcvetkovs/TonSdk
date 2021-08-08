@@ -3,14 +3,16 @@
     public struct ParamsOfBocCacheUnpin
     {
         /// <summary>
-        /// Pinned name
+        ///     Pinned name.
         /// </summary>
         public string Pin { get; set; }
 
         /// <summary>
-        /// <para>Reference to the cached BOC.</para>
-        /// <para>If it is provided then only referenced BOC is unpinned</para>
+        ///     Reference to the cached BOC.
         /// </summary>
+        /// <remarks>
+        ///     If it is provided then only referenced BOC is unpinned.
+        /// </remarks>
         public string BocRef { get; set; }
     }
 }

@@ -3,7 +3,7 @@
     public struct RegisteredSigningBox
     {
         /// <summary>
-        /// Handle of the signing box.
+        ///     Handle of the signing box.
         /// </summary>
         public uint Handle { get; set; }
     }

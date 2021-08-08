@@ -4,31 +4,28 @@ namespace TonSdk.Modules.Client.Models
 {
     public struct ResultOfBuildInfo
     {
-        public BuildInfo BuildInfo { get; set; }
-    }
-
-    public struct BuildInfo
-    {
-        [JsonPropertyName("buildNumber")]
+        /// <summary>
+        ///     Build number assigned to this build by the CI.
+        /// </summary>
         public uint BuildNumber { get; set; }
 
-        [JsonPropertyName("ton-labs-types")]
-        public CommitInfo TonLabsTypes { get; set; }
+        /// <summary>
+        ///     Fingerprint of the most important dependencies.
+        /// </summary>
+        public BuildInfoDependency[] Dependencies { get; set; }
+    }
 
-        [JsonPropertyName("ton-labs-block")]
-        public CommitInfo TonLabsBlock { get; set; }
+    public class BuildInfoDependency
+    {
+        /// <summary>
+        ///     Usually it is a crate name.
+        /// </summary>
+        public string Name { get; set; }
 
-        [JsonPropertyName("ton-labs-block-json")]
-        public CommitInfo TonLabsBlockJson { get; set; }
-
-        [JsonPropertyName("ton-labs-vm")]
-        public CommitInfo TonLabsVm { get; set; }
-
-        [JsonPropertyName("ton-labs-abi")]
-        public CommitInfo TonLabsAbi { get; set; }
-
-        [JsonPropertyName("ton-labs-executor")]
-        public CommitInfo TonLabsExecutor { get; set; }
+        /// <summary>
+        ///     Git commit hash of the related repository.
+        /// </summary>
+        public string GitCommit { get; set; }
     }
 
     public struct CommitInfo

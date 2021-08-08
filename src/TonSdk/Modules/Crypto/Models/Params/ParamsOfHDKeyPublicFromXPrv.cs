@@ -3,7 +3,7 @@
     public struct ParamsOfHDKeyPublicFromXPrv
     {
         /// <summary>
-        /// Serialized extended private key
+        ///     Serialized extended private key.
         /// </summary>
         public string Xprv { get; set; }
     }

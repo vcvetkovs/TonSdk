@@ -5,11 +5,13 @@ VisualStudioVersion = 16.0.30709.132
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{BAB154A0-F8A9-4428-9212-2570E76DF19F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TonSdk", "src\TonSdk\TonSdk.csproj", "{73F899A4-58F8-4EF9-A785-75FCEEEBE32A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TonSdk", "src\TonSdk\TonSdk.csproj", "{73F899A4-58F8-4EF9-A785-75FCEEEBE32A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TonSdk.Tests", "tests\TonSdk.Tests\TonSdk.Tests.csproj", "{9EF768C1-8FD8-47B0-936B-7D2B01EFC184}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TonSdk.Common", "src\TonSdk.Common\TonSdk.Common.csproj", "{E55888D3-512A-4669-9347-6318BAA54767}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TonSdk.Tests", "tests\TonSdk.Tests\TonSdk.Tests.csproj", "{9EF768C1-8FD8-47B0-936B-7D2B01EFC184}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TonSdk.Common", "src\TonSdk.Common\TonSdk.Common.csproj", "{E55888D3-512A-4669-9347-6318BAA54767}"
+EndProject
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

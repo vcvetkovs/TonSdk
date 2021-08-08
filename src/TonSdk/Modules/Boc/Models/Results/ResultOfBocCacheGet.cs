@@ -3,7 +3,7 @@
     public struct ResultOfBocCacheGet
     {
         /// <summary>
-        /// BOC encoded as base64.
+        ///     BOC encoded as base64.
         /// </summary>
         public string Boc { get; set; }
     }

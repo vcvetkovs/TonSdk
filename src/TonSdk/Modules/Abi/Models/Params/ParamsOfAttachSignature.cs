@@ -1,25 +1,32 @@
-﻿namespace TonSdk.Modules.Abi.Models
+﻿using System.Text.Json.Serialization;
+using TonSdk.Common.Converters;
+
+namespace TonSdk.Modules.Abi.Models
 {
     public struct ParamsOfAttachSignature
     {
         /// <summary>
-        /// Contract ABI.
+        ///     Contract ABI.
         /// </summary>
+        [JsonConverter(typeof(PolymorphicTypeJsonConverter))]
         public Abi Abi { get; set; }
 
-        /// <summary>
-        /// Public key encoded in `hex`.
-        /// </summary>
+        /// <remarks>
+        ///     Must be encoded with <c>hex</c>.
+        /// </remarks>
         public string PublicKey { get; set; }
 
         /// <summary>
-        /// Unsigned message BOC encoded in `base64`.
+        ///     Unsigned message BOC.
         /// </summary>
+        /// <remarks>
+        ///     Must be encoded with <c>base64</c>.
+        /// </remarks>
         public string Message { get; set; }
 
-        /// <summary>
-        /// Signature encoded in `hex`.
-        /// </summary>
+        /// <remarks>
+        ///     Must be encoded with <c>hex</c>.
+        /// </remarks>
         public string Signature { get; set; }
     }
 }

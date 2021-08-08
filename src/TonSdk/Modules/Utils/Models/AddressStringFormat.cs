@@ -1,12 +1,22 @@
-﻿using TonSdk.Modules.Utils.Enums;
-
-namespace TonSdk.Modules.Utils.Models
+﻿namespace TonSdk.Modules.Utils.Models
 {
-    public struct AddressStringFormat
+    public abstract class AddressStringFormat
     {
-        public AddressStringFormatType Type { get; set; }
-        public bool Url { get; set; }
-        public bool Test { get; set; }
-        public bool Bounce { get; set; }
+        public class AccountId : AddressStringFormat
+        {
+        }
+
+        public class Hex : AddressStringFormat
+        {
+        }
+
+        public class Base64 : AddressStringFormat
+        {
+            public bool Url { get; set; }
+
+            public bool Test { get; set; }
+
+            public bool Bounce { get; set; }
+        }
     }
 }

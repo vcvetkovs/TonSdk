@@ -12,14 +12,14 @@ namespace TonSdk.Modules.Tvm
             _client = client;
         }
 
-        public Task<ResultOfRunExecutor> RunExecutor<AbiType>(ParamsOfRunExecutor<AbiType> @params)
+        public Task<ResultOfRunExecutor> RunExecutor(ParamsOfRunExecutor @params)
         {
             return _client.CallFunction<ResultOfRunExecutor>(
                 Consts.Commands.RunExecutor,
                 @params);
         }
 
-        public Task<ResultOfRunTvm> RunTvm<AbiType>(ParamsOfRunTvm<AbiType> @params)
+        public Task<ResultOfRunTvm> RunTvm(ParamsOfRunTvm @params)
         {
             return _client.CallFunction<ResultOfRunTvm>(
                 Consts.Commands.RunTvm,

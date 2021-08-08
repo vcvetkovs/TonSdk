@@ -3,8 +3,11 @@
     public struct ResultOfSigningBoxSign
     {
         /// <summary>
-        /// Encoded with `hex`.
+        ///     Data signature.
         /// </summary>
+        /// <remarks>
+        ///     Encoded with <c>hex</c>.
+        /// </remarks>
         public string Signature { get; set; }
     }
 }

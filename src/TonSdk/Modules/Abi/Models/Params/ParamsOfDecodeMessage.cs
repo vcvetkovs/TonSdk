@@ -3,12 +3,12 @@
     public struct ParamsOfDecodeMessage
     {
         /// <summary>
-        /// Contract ABI.
+        ///     Contract ABI.
         /// </summary>
         public Abi Abi { get; set; }
 
         /// <summary>
-        /// Message BOC.
+        ///     Message BOC.
         /// </summary>
         public string Message { get; set; }
     }

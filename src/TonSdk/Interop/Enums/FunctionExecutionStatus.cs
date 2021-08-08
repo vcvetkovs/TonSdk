@@ -11,6 +11,10 @@
         /// </summary>
         NoOperation = 2,
 
+        AppRequest = 3,
+
+        AppNotify = 4,
+
         Custom = 100
     }
 }

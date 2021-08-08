@@ -3,7 +3,7 @@
     public struct ResultOfGetBlockchainConfig
     {
         /// <summary>
-        /// Blockchain config BOC encoded as base64.
+        ///     Blockchain config BOC encoded as base64.
         /// </summary>
         public string ConfigBoc { get; set; }
     }

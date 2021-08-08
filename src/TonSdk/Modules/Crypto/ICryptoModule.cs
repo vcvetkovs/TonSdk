@@ -6,241 +6,309 @@ using TonSdk.Modules.Crypto.Models;
 namespace TonSdk.Modules.Crypto
 {
     /// <summary>
-    /// Crypto functions.
+    ///     Crypto functions.
     /// </summary>
     public interface ICryptoModule
     {
         /// <summary>
-        /// Integer factorization.
-        /// 
-        /// <para>
-        /// Performs prime factorization – decomposition of a composite number
-        /// into a product of smaller prime integers (factors).
-        /// </para>
-        /// 
-        /// See [https://en.wikipedia.org/wiki/Integer_factorization]
+        ///     Integer factorization.
         /// </summary>
+        /// <remarks>
+        ///     Performs prime factorization – decomposition of a composite number
+        ///     into a product of smaller prime integers (factors).
+        ///     See [https://en.wikipedia.org/wiki/Integer_factorization]
+        /// </remarks>
         Task<ResultOfFactorize> Factorize(ParamsOfFactorize @params);
 
         /// <summary>
-        /// Modular exponentiation.
-        /// 
-        /// <para>
-        /// Performs modular exponentiation for big integers (`base`^`exponent` mod `modulus`).
-        /// </para>
-        /// 
-        /// See [https://en.wikipedia.org/wiki/Modular_exponentiation]
+        ///     Modular exponentiation.
         /// </summary>
+        /// <remarks>
+        ///     Performs modular exponentiation for big integers (<c>base</c>^<c>exponent</c> mod <c>modulus</c>).
+        ///     See [https://en.wikipedia.org/wiki/Modular_exponentiation]
+        /// </remarks>
         Task<ResultOfModularPower> ModularPower(ParamsOfModularPower @params);
 
         /// <summary>
-        /// Calculates CRC16 using TON algorithm.
+        ///     Calculates CRC16 using TON algorithm.
         /// </summary>
         Task<ResultOfTonCrc16> TonCrc16(ParamsOfTonCrc16 @params);
 
         /// <summary>
-        /// Generates random byte array of the specified length and returns it in `base64` format.
+        ///     Generates random byte array of the specified length and returns it in <c>base64</c> format.
         /// </summary>
-        Task<ResultOfGenerateRandomBytes> GenerateRandomBytes(
-            ParamsOfGenerateRandomBytes @params);
+        Task<ResultOfGenerateRandomBytes> GenerateRandomBytes(ParamsOfGenerateRandomBytes @params);
 
         /// <summary>
-        /// Converts public key to ton safe_format.
+        ///     Converts public key to ton safe_format.
         /// </summary>
         Task<ResultOfConvertPublicKeyToTonSafeFormat> ConvertPublicKeyToTonSafeFormat(
             ParamsOfConvertPublicKeyToTonSafeFormat @params);
 
         /// <summary>
-        /// Generates random ed25519 key pair.
+        ///     Generates random ed25519 key pair.
         /// </summary>
         Task<KeyPair> GenerateRandomSignKeys();
 
         /// <summary>
-        /// Signs a data using the provided keys.
+        ///     Signs a data using the provided keys.
         /// </summary>
         Task<ResultOfSign> Sign(ParamsOfSign @params);
 
         /// <summary>
-        /// Verifies signed data using the provided public key.
-        /// Raises error if verification is failed.
+        ///     Verifies signed data using the provided public key.
+        ///     Raises error if verification is failed.
         /// </summary>
-        public Task<ResultOfVerifySignature> VerifySignature(ParamsOfVerifySignature @params);
+        Task<ResultOfVerifySignature> VerifySignature(ParamsOfVerifySignature @params);
 
         /// <summary>
-        /// Calculates SHA256 hash of the specified data.
+        ///     Calculates SHA256 hash of the specified data.
         /// </summary>
-        public Task<ResultOfHash> Sha256(ParamsOfHash @params);
+        Task<ResultOfHash> Sha256(ParamsOfHash @params);
 
         /// <summary>
-        /// Calculates SHA512 hash of the specified data.
+        ///     Calculates SHA512 hash of the specified data.
         /// </summary>
-        public Task<ResultOfHash> Sha512(ParamsOfHash @params);
+        Task<ResultOfHash> Sha512(ParamsOfHash @params);
 
         /// <summary>
-        /// Perform `scrypt` encryption.
-        /// 
-        /// <para>
-        /// Derives key from `password` and `key` using `scrypt` algorithm.
-        /// </para>
-        /// 
-        /// See [https://en.wikipedia.org/wiki/Scrypt].
-        /// 
-        /// <para>
-        /// # Arguments
-        ///  - `log_n` - The log2 of the Scrypt parameter `N`
-        ///  - `r` - The Scrypt parameter `r`
-        ///  - `p` - The Scrypt parameter `p`
-        /// </para>
-        /// <para>
-        /// # Conditions
-        ///  - `log_n` must be less than `64`
-        ///  - `r` must be greater than `0` and less than or equal to `4294967295`
-        ///  - `p` must be greater than `0` and less than `4294967295`
-        /// </para>
-        /// <para>
-        /// # Recommended values sufficient for most use-cases:
-        ///  - `log_n = 15` (`n = 32768`)
-        ///  - `r = 8`
-        ///  - `p = 1`
-        /// </para>
+        ///     Perform `scrypt` encryption.
         /// </summary>
-        public Task<ResultOfScrypt> Scrypt(ParamsOfScrypt @params);
+        /// <remarks>
+        ///     Derives key from `password` and `key` using `scrypt` algorithm.
+        ///     See [https://en.wikipedia.org/wiki/Scrypt].
+        ///  
+        ///      # Arguments
+        ///       <list type="bullet">
+        ///        <item>
+        ///         <term>log_n</term>
+        ///         <description>The log2 of the Scrypt parameter `N`</description>
+        ///        </item>
+        ///        <item>
+        ///         <term>r</term>
+        ///         <description>The Scrypt parameter `r`</description>
+        ///        </item>
+        ///        <item>
+        ///         <term>p</term>
+        ///         <description>The Scrypt parameter `p`</description>
+        ///        </item>
+        ///       </list>
+        ///     <para/>
+        ///      # Conditions
+        ///       <list type="bullet">
+        ///        <item>
+        ///         <term>log_n</term>
+        ///         <description>must be less than `64`</description>
+        ///        </item>
+        ///        <item>
+        ///         <term>r</term>
+        ///         <description>must be greater than `0` and less than or equal to `4294967295`</description>
+        ///        </item>
+        ///        <item>
+        ///         <term>p</term>
+        ///         <description>must be greater than `0` and less than `4294967295`</description>
+        ///        </item>
+        ///       </list>
+        ///     <para/>
+        ///      # Recommended values sufficient for most use-cases:
+        ///       <list type="bullet">
+        ///        <item>
+        ///         <term>log_n = 15</term>
+        ///         <description>(`n = 32768`)</description>
+        ///        </item>
+        ///        <item>
+        ///         <term>r = 8</term>
+        ///        </item>
+        ///        <item>
+        ///         <term>p = 1</term>
+        ///        </item>
+        ///       </list>
+        ///     <para/>
+        /// </remarks>
+        Task<ResultOfScrypt> Scrypt(ParamsOfScrypt @params);
 
         /// <summary>
-        /// Generates a key pair for signing from the secret key.
+        ///     Verifies the signature with public key and `unsigned` data.
         /// </summary>
-        public Task<KeyPair> NaclSignKeypairFromSecretKey(ParamsOfNaclSignKeyPairFromSecret @params);
+        Task<ResultOfNaclSignDetachedVerify> NaclSignDetachedVerify(ParamsOfNaclSignDetachedVerify @params);
 
         /// <summary>
-        /// Signs data using the signer's secret key.
+        ///     Generates a key pair for signing from the secret key.
         /// </summary>
-        public Task<ResultOfNaclSign> NaclSign(ParamsOfNaclSign @params);
-
-        public Task<ResultOfNaclSignOpen> NaclSignOpen(ParamsOfNaclSignOpen @params);
-
-        public Task<ResultOfNaclSignDetached> NaclSignDetached(ParamsOfNaclSign @params);
-
-        public Task<KeyPair> NaclBoxKeypair();
+        /// <remarks>
+        ///     **NOTE:** In the result the secret key is actually the concatenation
+        ///     of secret and public keys (128 symbols hex string) by design of [NaCL](http://nacl.cr.yp.to/sign.html).
+        ///  <para/>
+        ///     See also [the stackexchange question](https://crypto.stackexchange.com/questions/54353/).
+        ///  <para/>
+        /// </remarks>
+        Task<KeyPair> NaclSignKeypairFromSecretKey(ParamsOfNaclSignKeyPairFromSecret @params);
 
         /// <summary>
-        /// Generates key pair from a secret key.
+        ///     Signs data using the signer's secret key.
         /// </summary>
-        public Task<KeyPair> NaclBoxKeypairFromSecretKey(ParamsOfNaclBoxKeyPairFromSecret @params);
+        Task<ResultOfNaclSign> NaclSign(ParamsOfNaclSign @params);
 
         /// <summary>
-        /// Public key authenticated encryption
-        /// 
-        /// <para>
-        /// Encrypt and authenticate a message using the senders secret key, the recievers public
-        /// key, and a nonce. 
-        /// </para>
+        ///     Verifies the signature in `signed` using the signer's public key `public`
+        ///     and returns the message `unsigned`.
+        ///     
+        ///     If the signature fails verification, crypto_sign_open raises an exception.
         /// </summary>
-        public Task<ResultOfNaclBox> NaclBox(ParamsOfNaclBox @params);
+        Task<ResultOfNaclSignOpen> NaclSignOpen(ParamsOfNaclSignOpen @params);
 
         /// <summary>
-        /// Decrypt and verify the cipher text using the recievers secret key, the senders public
-        /// key, and the nonce.
+        ///     Signs the message `unsigned` using the secret key `secret`
+        ///     and returns a signature `signature`.
         /// </summary>
-        public Task<ResultOfNaclBoxOpen> NaclBoxOpen(ParamsOfNaclBoxOpen @params);
+        Task<ResultOfNaclSignDetached> NaclSignDetached(ParamsOfNaclSign @params);
 
         /// <summary>
-        /// Encrypt and authenticate message using nonce and secret key.
+        ///     Generates a random NaCl key pair
         /// </summary>
-        public Task<ResultOfNaclBox> NaclSecretBox(ParamsOfNaclSecretBox @params);
+        Task<KeyPair> NaclBoxKeypair();
 
         /// <summary>
-        /// Decrypts and verifies cipher text using `nonce` and secret `key`.
+        ///     Generates key pair from a secret key.
         /// </summary>
-        public Task<ResultOfNaclBoxOpen> NaclSecretBoxOpen(ParamsOfNaclSecretBoxOpen @params);
+        Task<KeyPair> NaclBoxKeypairFromSecretKey(ParamsOfNaclBoxKeyPairFromSecret @params);
 
         /// <summary>
-        /// Prints the list of words from the specified dictionary.
+        ///     Public key authenticated encryption.
         /// </summary>
-        public Task<ResultOfMnemonicWords> MnemonicWords(ParamsOfMnemonicWords @params);
+        /// <remarks>
+        ///     Encrypt and authenticate a message using the senders secret key, the receivers public
+        ///     key, and a nonce. 
+        /// </remarks>
+        Task<ResultOfNaclBox> NaclBox(ParamsOfNaclBox @params);
 
         /// <summary>
-        /// Generates a random mnemonic from the specified dictionary and word count
+        ///     Decrypt and verify the cipher text using the receivers secret key, the senders public
+        ///     key, and the nonce.
         /// </summary>
-        public Task<ResultOfMnemonicFromRandom> MnemonicFromRandom(ParamsOfMnemonicFromRandom @params);
+        Task<ResultOfNaclBoxOpen> NaclBoxOpen(ParamsOfNaclBoxOpen @params);
 
         /// <summary>
-        /// Generates mnemonic from pre-generated entropy.
+        ///     Encrypt and authenticate message using nonce and secret key.
         /// </summary>
-        public Task<ResultOfMnemonicFromEntropy> MnemonicFromEntropy(ParamsOfMnemonicFromEntropy @params);
+        Task<ResultOfNaclBox> NaclSecretBox(ParamsOfNaclSecretBox @params);
 
         /// <summary>
-        /// Validates a mnemonic phrase.
-        /// 
-        /// <para>
-        /// The phrase supplied will be checked for word length and validated according to the checksum
-        /// specified in BIP0039.
-        /// </para>
+        ///     Decrypts and verifies cipher text using `nonce` and secret `key`.
         /// </summary>
-        public Task<ResultOfMnemonicVerify> MnemonicVerify(ParamsOfMnemonicVerify @params);
+        Task<ResultOfNaclBoxOpen> NaclSecretBoxOpen(ParamsOfNaclSecretBoxOpen @params);
 
         /// <summary>
-        /// Derives a key pair for signing from the seed phrase.
-        /// 
-        /// <para>
-        /// Validates the seed phrase, generates master key and then derives
-        /// the key pair from the master key and the specified path.
-        /// </para>
+        ///     Prints the list of words from the specified dictionary.
         /// </summary>
-        public Task<KeyPair> MnemonicDeriveSignKeys(ParamsOfMnemonicDeriveSignKeys @params);
+        Task<ResultOfMnemonicWords> MnemonicWords(ParamsOfMnemonicWords @params);
 
         /// <summary>
-        /// Generates an extended master private key that will be the root for all the derived keys.
+        ///     Generates a random mnemonic from the specified dictionary and word count
         /// </summary>
-        public Task<ResultOfHDKeyXPrvFromMnemonic> HDKeyXPrvFromMnemonic(ParamsOfHDKeyXPrvFromMnemonic @params);
+        Task<ResultOfMnemonicFromRandom> MnemonicFromRandom(ParamsOfMnemonicFromRandom @params);
 
         /// <summary>
-        /// Returns extended private key derived from the specified extended private key and child index.
+        ///     Generates mnemonic from pre-generated entropy.
         /// </summary>
-        public Task<ResultOfHDKeyDeriveFromXPrv> HDKeyDeriveFromXPrv(ParamsOfHDKeyDeriveFromXPrv @params);
+        Task<ResultOfMnemonicFromEntropy> MnemonicFromEntropy(ParamsOfMnemonicFromEntropy @params);
 
         /// <summary>
-        /// Derives the exented private key from the specified key and path.
+        ///     Validates a mnemonic phrase.
         /// </summary>
-        public Task<ResultOfHDKeyDeriveFromXPrvPath> HDKeyDeriveFromXPrvPath(ParamsOfHDKeyDeriveFromXPrvPath @params);
+        /// <remarks>
+        ///     The phrase supplied will be checked for word length and validated according to the checksum
+        ///     specified in BIP0039.
+        /// </remarks>
+        Task<ResultOfMnemonicVerify> MnemonicVerify(ParamsOfMnemonicVerify @params);
 
         /// <summary>
-        /// Extracts the private key from the serialized extended private key.
+        ///     Derives a key pair for signing from the seed phrase.
         /// </summary>
-        public Task<ResultOfHDKeySecretFromXPrv> HDKeySecretFromXPrv(ParamsOfHDKeySecretFromXPrv @params);
+        /// <remarks>
+        ///     Validates the seed phrase, generates master key and then derives
+        ///     the key pair from the master key and the specified path.
+        /// </remarks>
+        Task<KeyPair> MnemonicDeriveSignKeys(ParamsOfMnemonicDeriveSignKeys @params);
 
         /// <summary>
-        /// Extracts the public Task<key> from the serialized extended private key.
+        ///     Generates an extended master private key that will be the root for all the derived keys.
         /// </summary>
-        public Task<ResultOfHDKeyPublicFromXPrv> HDKeyPublicFromXPrv(ParamsOfHDKeyPublicFromXPrv @params);
+        Task<ResultOfHDKeyXPrvFromMnemonic> HDKeyXPrvFromMnemonic(ParamsOfHDKeyXPrvFromMnemonic @params);
 
         /// <summary>
-        /// Performs symmetric `chacha20` encryption.
+        ///     Returns extended private key derived from the specified extended private key and child index.
         /// </summary>
-        public Task<ResultOfHDKeyPublicFromXPrv> Chacha20(ParamsOfHDKeyPublicFromXPrv @params);
+        Task<ResultOfHDKeyDeriveFromXPrv> HDKeyDeriveFromXPrv(ParamsOfHDKeyDeriveFromXPrv @params);
 
         /// <summary>
-        /// Register an application implemented signing box.
+        ///     Derives the extended private key from the specified key and path.
         /// </summary>
-        public Task<RegisteredSigningBox> RegisterSigningBox(Action<JsonElement, uint> appObject = null);
+        Task<ResultOfHDKeyDeriveFromXPrvPath> HDKeyDeriveFromXPrvPath(ParamsOfHDKeyDeriveFromXPrvPath @params);
 
         /// <summary>
-        /// Creates a default signing box implementation.
+        ///     Extracts the private key from the serialized extended private key.
         /// </summary>
-        public Task<RegisteredSigningBox> GetSigningBox(KeyPair @params);
+        Task<ResultOfHDKeySecretFromXPrv> HDKeySecretFromXPrv(ParamsOfHDKeySecretFromXPrv @params);
 
         /// <summary>
-        /// Returns public key of signing key pair.
+        ///     Extracts the Task<key> from the serialized extended private key.
         /// </summary>
-        public Task<ResultOfSigningBoxGetPublicKey> SigningBoxGetPublicKey(RegisteredSigningBox @params);
+        Task<ResultOfHDKeyPublicFromXPrv> HDKeyPublicFromXPrv(ParamsOfHDKeyPublicFromXPrv @params);
 
         /// <summary>
-        /// Returns signed user data.
+        ///     Performs symmetric `chacha20` encryption.
         /// </summary>
-        public Task<ResultOfSigningBoxSign> SigningBoxSign(ParamsOfSigningBoxSign @params);
+        Task<ResultOfHDKeyPublicFromXPrv> Chacha20(ParamsOfHDKeyPublicFromXPrv @params);
 
         /// <summary>
-        /// Removes signing box from SDK.
+        ///     Register an application implemented signing box.
         /// </summary>
-        public Task RemoveSigningBox(RegisteredSigningBox @params);
+        Task<RegisteredSigningBox> RegisterSigningBox(Action<JsonElement, uint> callback = null);
+
+        /// <summary>
+        ///     Creates a default signing box implementation.
+        /// </summary>
+        Task<RegisteredSigningBox> GetSigningBox(KeyPair @params);
+
+        /// <summary>
+        ///     Returns public key of signing key pair.
+        /// </summary>
+        Task<ResultOfSigningBoxGetPublicKey> SigningBoxGetPublicKey(RegisteredSigningBox @params);
+
+        /// <summary>
+        ///     Returns signed user data.
+        /// </summary>
+        Task<ResultOfSigningBoxSign> SigningBoxSign(ParamsOfSigningBoxSign @params);
+
+        /// <summary>
+        ///     Removes signing box from SDK.
+        /// </summary>
+        Task RemoveSigningBox(RegisteredSigningBox @params);
+
+        /// <summary>
+        ///     Register an application implemented encryption box.
+        /// </summary>
+        Task<RegisteredEncryptionBox> RegisterEncryptionBox(Func<ParamsOfAppEncryptionBox, Task<ResultOfAppEncryptionBox>> callback);
+
+        /// <summary>
+        ///     Removes encryption box from SDK.
+        /// </summary>
+        Task RemoveEncryptionBox(RegisteredEncryptionBox @params);
+
+        /// <summary>
+        ///     Queries info from the given encryption box.
+        /// </summary>
+        Task<ResultOfEncryptionBoxGetInfo> EncryptionBoxGetInfo(ParamsOfEncryptionBoxGetInfo @params);
+
+        /// <summary>
+        ///     Encrypts data using given encryption box.
+        /// </summary>
+        Task<ResultOfEncryptionBoxEncrypt> EncryptionBoxEncrypt(ParamsOfEncryptionBoxEncrypt @params);
+
+        /// <summary>
+        ///     Decrypts data using given encryption box.
+        /// </summary>
+        Task<ResultOfEncryptionBoxDecrypt> EncryptionBoxDecrypt(ParamsOfEncryptionBoxDecrypt @params);
     }
 }

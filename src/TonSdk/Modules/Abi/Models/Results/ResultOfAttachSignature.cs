@@ -3,12 +3,12 @@
     public struct ResultOfAttachSignature
     {
         /// <summary>
-        /// Signed message BOC.
+        ///     Signed message BOC.
         /// </summary>
         public string Message { get; set; }
 
         /// <summary>
-        /// Message ID.
+        ///     Message ID.
         /// </summary>
         public string MessageId { get; set; }
     }

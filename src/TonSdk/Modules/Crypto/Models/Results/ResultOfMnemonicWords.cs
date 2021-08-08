@@ -3,7 +3,7 @@
     public struct ResultOfMnemonicWords
     {
         /// <summary>
-        /// The list of mnemonic words.
+        ///     The list of mnemonic words.
         /// </summary>
         public string Words { get; set; }
     }
