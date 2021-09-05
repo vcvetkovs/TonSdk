@@ -78,21 +78,21 @@ namespace TonSdk.Modules.Crypto
         ///     Derives key from `password` and `key` using `scrypt` algorithm.
         ///     See [https://en.wikipedia.org/wiki/Scrypt].
         ///  
-        ///      # Arguments
-        ///       <list type="bullet">
-        ///        <item>
-        ///         <term>log_n</term>
-        ///         <description>The log2 of the Scrypt parameter `N`</description>
-        ///        </item>
-        ///        <item>
-        ///         <term>r</term>
-        ///         <description>The Scrypt parameter `r`</description>
-        ///        </item>
-        ///        <item>
-        ///         <term>p</term>
-        ///         <description>The Scrypt parameter `p`</description>
-        ///        </item>
-        ///       </list>
+        ///     # Arguments
+        ///      <list type="bullet">
+        ///       <item>
+        ///        <term>log_n</term>
+        ///        <description>The log2 of the Scrypt parameter `N`</description>
+        ///       </item>
+        ///       <item>
+        ///        <term>r</term>
+        ///        <description>The Scrypt parameter `r`</description>
+        ///       </item>
+        ///       <item>
+        ///        <term>p</term>
+        ///        <description>The Scrypt parameter `p`</description>
+        ///       </item>
+        ///      </list>
         ///     <para/>
         ///      # Conditions
         ///       <list type="bullet">
@@ -304,11 +304,32 @@ namespace TonSdk.Modules.Crypto
         /// <summary>
         ///     Encrypts data using given encryption box.
         /// </summary>
+        /// <remarks>
+        ///     Block cipher algorithms pad data to cipher block size
+        ///     so encrypted data can be longer then original data. <para />
+        ///      
+        ///     Client should store the original data size after
+        ///     encryption and use it after decryption to retrieve
+        ///     the original data from decrypted data.
+        /// </remarks>
         Task<ResultOfEncryptionBoxEncrypt> EncryptionBoxEncrypt(ParamsOfEncryptionBoxEncrypt @params);
 
         /// <summary>
         ///     Decrypts data using given encryption box.
         /// </summary>
+        /// <remarks>
+        ///     Block cipher algorithms pad data to cipher block size
+        ///     so encrypted data can be longer then original data. <para />
+        ///      
+        ///     Client should store the original data size after
+        ///     encryption and use it after decryption to retrieve
+        ///     the original data from decrypted data.
+        /// </remarks>
         Task<ResultOfEncryptionBoxDecrypt> EncryptionBoxDecrypt(ParamsOfEncryptionBoxDecrypt @params);
+
+        /// <summary>
+        ///     Creates encryption box with specified algorithm.
+        /// </summary>
+        public Task<RegisteredEncryptionBox> CreateEncryptionBox(ParamsOfCreateEncryptionBox @params);
     }
 }

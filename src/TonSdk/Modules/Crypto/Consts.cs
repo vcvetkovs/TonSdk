@@ -47,6 +47,7 @@
             public const string EncryptionBoxGetInfo = "crypto.encryption_box_get_info";
             public const string EncryptionBoxEncrypt = "crypto.encryption_box_encrypt";
             public const string EncryptionBoxDecrypt = "crypto.encryption_box_decrypt";
+            public const string CreateEncryptionBox = "create_encryption_box";
         }
     }
 }

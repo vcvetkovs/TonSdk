@@ -234,5 +234,10 @@ namespace TonSdk.Modules.Crypto
         {
             return await _client.CallFunction<ResultOfEncryptionBoxDecrypt>(Consts.Commands.EncryptionBoxDecrypt, @params);
         }
+
+        public async Task<RegisteredEncryptionBox> CreateEncryptionBox(ParamsOfCreateEncryptionBox @params)
+        {
+            return await _client.CallFunction<RegisteredEncryptionBox>(Consts.Commands.CreateEncryptionBox, @params);
+        }
     }
 }

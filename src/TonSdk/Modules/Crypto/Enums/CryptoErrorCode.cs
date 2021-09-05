@@ -1,6 +1,6 @@
 ﻿namespace TonSdk.Modules.Crypto.Enums
 {
-    public enum CryptoErrorCode
+    public enum CryptoErrorCode : byte
     {
         InvalidPublicKey = 100,
         InvalidSecretKey = 101,
@@ -23,5 +23,11 @@
         SigningBoxNotRegistered = 121,
         InvalidSignature = 122,
         EncryptionBoxNotRegistered = 123,
+        InvalidIvSize = 124,
+        UnsupportedCipherMode = 125,
+        CannotCreateCipher = 126,
+        EncryptDataError = 127,
+        DecryptDataError = 128,
+        IvRequired = 129,
     }
 }
