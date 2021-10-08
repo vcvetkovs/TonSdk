@@ -74,15 +74,50 @@ namespace TonSdk.Modules.Boc
         public Task<ResultOfBocCacheSet> CacheSet(ParamsOfBocCacheSet @params);
 
         /// <summary>
-        ///     Unpin BOCs with specified pin. <para/>
-        ///     
-        ///     BOCs which don't have another pins will be removed from cache.
+        ///     Unpin BOCs with specified pin.
         /// </summary>
+        /// <remarks>
+        ///     BOCs which don't have another pins will be removed from cache.
+        /// </remarks>
         public Task CacheUnpin(ParamsOfBocCacheUnpin @params);
 
         /// <summary>
         ///     Encodes BOC from builder operations.
         /// </summary>
+        /// <remarks>
+        ///     Encodes bag of cells (BOC) with builder operations.
+        ///     This method provides the same functionality as
+        ///     Solidity TvmBuilder. <para />
+        ///     
+        ///     Resulting BOC of this method can be passed into
+        ///     Solidity and C++ contracts as TvmCell type.
+        /// </remarks>
         public Task<ResultOfEncodeBoc> EncodeBoc(ParamsOfEncodeBoc @params);
+
+
+        /// <summary>
+        ///     Returns the contract code's salt if it is present.
+        /// </summary>
+        Task<ResultOfGetCodeSalt> GetCodeSalt(ParamsOfGetCodeSalt @params);
+
+        /// <summary>
+        ///     Returns the new contract code with salt.
+        /// </summary>
+        Task<ResultOfSetCodeSalt> SetCodeSalt(ParamsOfSetCodeSalt @params);
+
+        /// <summary>
+        ///     Decodes tvc into code, data, libraries and special options.
+        /// </summary>
+        Task<ResultOfDecodeTvc> DecodeTvc(ParamsOfDecodeTvc @params);
+
+        /// <summary>
+        ///     Encodes tvc from code, data, libraries ans special options (see input params)
+        /// </summary>
+        Task<ResultOfEncodeTvc> EncodeTvc(ParamsOfEncodeTvc @params);
+
+        /// <summary>
+        ///     Returns the compiler version used to compile the code.
+        /// </summary>
+        Task<ResultOfGetCompilerVersion> GetCompilerVersion(ParamsOfGetCompilerVersion @params);
     }
 }

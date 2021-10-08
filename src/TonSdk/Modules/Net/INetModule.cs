@@ -162,24 +162,59 @@ namespace TonSdk.Modules.Net
         Task<ResultOfQueryCollection> QueryCounterparties(ParamsOfQueryCounterparties @params);
 
         /// <summary>
-        ///     Performs recursive retrieval of the transactions tree produced by the specific message:
+        ///     Performs recursive retrieval of a transactions tree produced by a specific message:
         ///     in_msg -> dst_transaction -> out_messages -> dst_transaction -> ... <para/>
         ///     
-        ///     All retrieved messages and transactions will be included
+        ///     If the chain of transactions execution is in progress while the function is running,
+        ///     it will wait for the next transactions to appear until the full tree or more than 50 transactions
+        ///     are received. <para/>
+        /// 
+        ///     All the retrieved messages and transactions are
         ///     into <see cref="ResultOfQueryTransactionTree.Messages"/>
         ///     and <see cref="ResultOfQueryTransactionTree.Transactions"/> respectively. <para/>
         ///     
-        ///     The retrieval process will stop when the retrieved transaction count is more than 50.
+        ///     Function reads transactions layer by layer, by pages of 20 transactions.
         /// </summary>
         /// <remarks>
-        ///     It is guaranteed that each message in 
+        ///     The retrieval prosess goes like this:
+        ///     Let's assume we have an infinite chain of transactions and each transaction generates 5 messages.
+        ///     <list type="number">
+        ///         <item>
+        ///             Retrieve 1st message (input parameter) and corresponding transaction - put it into result.
+        ///             It is the first level of the tree of transactions - its root.
+        ///             Retrieve 5 out message ids from the transaction for next steps.
+        ///         </item>
+        ///         <item>
+        ///             Retrieve 5 messages and corresponding transactions on the 2nd layer. Put them into result.
+        ///             Retrieve 5*5 out message ids from these transactions for next steps
+        ///         </item>
+        ///         <item>
+        ///             Retrieve 20 (size of the page) messages and transactions (3rd layer) and 20*5=100 message ids
+        ///             (4th layer).
+        ///             + 25 message ids of the 4th layer + 75 message ids of the 5th layer.
+        ///         </item>
+        ///         <item>
+        ///             Retrieve 20 more messages and 20 more transactions of the 4th layer + 100 more message ids of the
+        ///             5th layer.
+        ///         </item>
+        ///         <item>
+        ///             Now we have 1+5+20+20+20 = 66 transactions, which is more than 50. Function exits with the tree
+        ///             of 1m->1t->5m->5t->25m->25t->35m->35t. If we see any message ids in the last transactions out_msgs,
+        ///             which don't have corresponding messages in the function result, it means that the full tree was not
+        ///             received and wemneed to continue iteration. 
+        ///         </item>
+        ///     </list>
+        /// 
+        ///     To summarize, it is guaranteed that each message in 
         ///     <see cref="ResultOfQueryTransactionTree.Messages"/>
-        ///     has the corresponding transaction
-        ///     in the <see cref="ResultOfQueryTransactionTree.Transactions"/>. <para/>
+        ///     has the corresponding transaction in the
+        ///     <see cref="ResultOfQueryTransactionTree.Transactions"/>. <para />
         ///     
-        ///     But there are no guaranties that all messages from transactions <see cref="TransactionNode.OutMsgs"/> are
-        ///     presented in <see cref="ResultOfQueryTransactionTree.Messages"/>.
-        ///     So the application have to continue retrieval for missing messages if it requires.
+        ///     But there is no guarantee that all messages from transactions
+        ///     <see cref="TransactionNode.OutMsgs"/> are
+        ///     presented in <see cref="ResultOfQueryTransactionTree.Messages"/>. <para />
+        ///     
+        ///     So the application has to continue retrieval for missing messages if it requires.
         ///  <para/>
         /// </remarks>
         Task<ResultOfQueryTransactionTree> QueryTransactionTree(ParamsOfQueryTransactionTree @params);

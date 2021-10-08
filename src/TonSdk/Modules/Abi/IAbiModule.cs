@@ -142,5 +142,27 @@ namespace TonSdk.Modules.Abi
         ///     </list>
         /// </summary>
         Task<ResultOfEncodeInternalMessage> EncodeInternalMessage(ParamsOfEncodeInternalMessage @params);
+
+        /// <summary>
+        ///     Updates initial account data with initial values for the contract's static
+        ///     variables and owner's public key.
+        /// </summary>
+        /// <remarks>
+        ///     This operation is applicable only for initial account data (before deploy).
+        ///     If the contract is already deployed, its data doesn't 
+        ///     contain this data section any more.
+        /// </remarks>
+        Task<ResultOfUpdateInitialData> UpdateInitialData(ParamsOfUpdateInitialData @params);
+
+        /// <summary>
+        ///     Decodes initial values of a contract's static variables and owner's
+        ///     public key from account initial data.
+        /// </summary>
+        /// <remarks>
+        ///     This operation is applicable only for initial account data (before deploy).
+        ///     If the contract is already deployed, its data doesn't 
+        ///     contain this data section any more.
+        /// </remarks>
+        Task<ResultOfDecodeInitialData> DecodeInitialData(ParamsOfDecodeInitialData @params);
     }
 }

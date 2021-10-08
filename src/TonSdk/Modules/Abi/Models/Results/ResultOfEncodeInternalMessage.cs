@@ -1,6 +1,6 @@
 ﻿namespace TonSdk.Modules.Abi.Models
 {
-	public class ResultOfEncodeInternalMessage
+	public struct ResultOfEncodeInternalMessage
     {
         /// <summary>
         ///     Message BOC encoded with <c>base64</c>.

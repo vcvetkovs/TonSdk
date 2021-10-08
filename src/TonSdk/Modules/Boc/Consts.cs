@@ -16,6 +16,11 @@
             public const string CacheSet = "boc.cache_set";
             public const string CacheUnpin = "boc.cache_unpin";
             public const string EncodeBoc = "boc.encode_boc";
+            public const string GetCodeSalt = "boc.get_code_salt";
+            public const string SetCodeSalt = "boc.set_code_salt";
+            public const string DecodeTvc = "boc.decode_tvc";
+            public const string EncodeTvc = "boc.encode_tvc";
+            public const string GetCompilerVersion = "boc.get_compiler_version";
         }
     }
 }

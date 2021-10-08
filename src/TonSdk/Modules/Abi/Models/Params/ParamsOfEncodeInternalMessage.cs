@@ -3,7 +3,7 @@ using TonSdk.Common.Converters;
 
 namespace TonSdk.Modules.Abi.Models
 {
-	public class ParamsOfEncodeInternalMessage
+	public struct ParamsOfEncodeInternalMessage
     {
         /// <summary>
         ///     Contract ABI.

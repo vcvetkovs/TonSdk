@@ -15,5 +15,6 @@
         InvalidAbi = 311,
         InvalidFunctionId = 312,
         InvalidData = 313,
+        EncodeInitialDataFailed = 314,
     }
 }

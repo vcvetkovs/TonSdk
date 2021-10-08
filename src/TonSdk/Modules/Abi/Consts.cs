@@ -13,6 +13,8 @@
             public const string EncodeMessage = "abi.encode_message";
             public const string EncodeAccount = "abi.encode_account";
             public const string EncodeInternalMessage = "abi.encode_internal_message";
+            public const string UpdateInitialData = "abi.update_initial_data";
+            public const string DecodeInitialData = "abi.decode_initial_data";     
         }
     }
 }

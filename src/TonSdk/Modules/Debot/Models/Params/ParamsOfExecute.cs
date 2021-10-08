@@ -3,7 +3,7 @@
 	/// <summary>
 	///     Parameters for executing debot action.
 	/// </summary>
-	public class ParamsOfExecute
+	public struct ParamsOfExecute
     {
         /// <summary>
         ///     Debot handle which references an instance of debot engine.

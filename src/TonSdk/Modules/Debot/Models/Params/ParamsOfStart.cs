@@ -3,7 +3,7 @@
 	/// <summary>
 	///		Parameters to start DeBot. DeBot must be already initialized with init().
 	/// </summary>
-	public class ParamsOfStart
+	public struct ParamsOfStart
 	{
 		/// <summary>
 		///		Debot handle which references an instance of debot engine.

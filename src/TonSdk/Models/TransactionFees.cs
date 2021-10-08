@@ -1,6 +1,6 @@
 ﻿namespace TonSdk.Models
 {
-    public class TransactionFees
+    public struct TransactionFees
     {
         public ulong InMsgFwdFee { get; set; }
 

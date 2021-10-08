@@ -66,5 +66,17 @@ namespace TonSdk.Modules.Abi
             return _client
                 .CallFunction<ResultOfEncodeInternalMessage>(Consts.Commands.EncodeInternalMessage, @params);
         }
+
+        public Task<ResultOfUpdateInitialData> UpdateInitialData(ParamsOfUpdateInitialData @params)
+        {
+            return _client
+                .CallFunction<ResultOfUpdateInitialData>(Consts.Commands.UpdateInitialData, @params);
+        }
+
+        public Task<ResultOfDecodeInitialData> DecodeInitialData(ParamsOfDecodeInitialData @params)
+        {
+            return _client
+                .CallFunction<ResultOfDecodeInitialData>(Consts.Commands.DecodeInitialData, @params);
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace TonSdk.Modules.Abi.Models
 {
-    public class AbiFunction
+    public struct AbiFunction
     {
         public string Name { get; set; }
 

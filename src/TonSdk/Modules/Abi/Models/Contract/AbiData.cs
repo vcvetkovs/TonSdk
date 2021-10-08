@@ -1,6 +1,6 @@
 ﻿namespace TonSdk.Modules.Abi.Models
 {
-    public class AbiData
+    public struct AbiData
     {
         public ulong Key { get; set; }
 

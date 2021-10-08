@@ -1,6 +1,6 @@
 ﻿namespace TonSdk.Modules.Debot.Models
 {
-	public class ResultOfFetch
+	public struct ResultOfFetch
     {
         /// <summary>
         ///     Debot metadata.

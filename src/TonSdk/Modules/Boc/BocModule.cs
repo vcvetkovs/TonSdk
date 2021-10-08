@@ -77,5 +77,30 @@ namespace TonSdk.Modules.Boc
         {
             return _client.CallFunction<ResultOfEncodeBoc>(Consts.Commands.EncodeBoc, @params);
         }
+
+        public Task<ResultOfGetCodeSalt> GetCodeSalt(ParamsOfGetCodeSalt @params)
+        {
+            return _client.CallFunction<ResultOfGetCodeSalt>(Consts.Commands.GetCodeSalt, @params);
+        }
+
+        public Task<ResultOfSetCodeSalt> SetCodeSalt(ParamsOfSetCodeSalt @params)
+        {
+            return _client.CallFunction<ResultOfSetCodeSalt>(Consts.Commands.SetCodeSalt, @params);
+        }
+
+        public Task<ResultOfDecodeTvc> DecodeTvc(ParamsOfDecodeTvc @params)
+        {
+            return _client.CallFunction<ResultOfDecodeTvc>(Consts.Commands.DecodeTvc, @params);
+        }
+
+        public Task<ResultOfEncodeTvc> EncodeTvc(ParamsOfEncodeTvc @params)
+        {
+            return _client.CallFunction<ResultOfEncodeTvc>(Consts.Commands.EncodeTvc, @params);
+        }
+
+        public Task<ResultOfGetCompilerVersion> GetCompilerVersion(ParamsOfGetCompilerVersion @params)
+        {
+            return _client.CallFunction<ResultOfGetCompilerVersion>(Consts.Commands.GetCompilerVersion, @params);
+        }
     }
 }
