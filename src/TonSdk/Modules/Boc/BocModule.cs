@@ -53,6 +53,11 @@ namespace TonSdk.Modules.Boc
             return _client.CallFunction<ResultOfGetBocHash>(Consts.Commands.GetBocHash, @params);
         }
 
+        public Task<ResultOfGetBocDepth> GetBocDepth(ParamsOfGetBocDepth @params)
+        {
+            return _client.CallFunction<ResultOfGetBocDepth>(Consts.Commands.GetBocDepth, @params);
+        }
+
         public Task<ResultOfGetCodeFromTvc> GetCodeFromTvc(ParamsOfGetCodeFromTvc @params)
         {
             return _client.CallFunction<ResultOfGetCodeFromTvc>(Consts.Commands.GetCodeFromTvc, @params);

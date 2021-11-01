@@ -14,7 +14,7 @@ namespace TonSdk.Modules.Boc
         /// <remarks>
         ///     JSON structure is compatible with GraphQL API message object.
         /// </remarks>
-        public Task<ResultOfParse> ParseMessage(ParamsOfParse @params);
+        Task<ResultOfParse> ParseMessage(ParamsOfParse @params);
 
         /// <summary>
         ///     Parses transaction boc into a JSON.
@@ -22,7 +22,7 @@ namespace TonSdk.Modules.Boc
         /// <remarks>
         ///     JSON structure is compatible with GraphQL API message object.
         /// </remarks>
-        public Task<ResultOfParse> ParseTransaction(ParamsOfParse @params);
+        Task<ResultOfParse> ParseTransaction(ParamsOfParse @params);
 
         /// <summary>
         ///     Parses account boc into a JSON.
@@ -30,7 +30,7 @@ namespace TonSdk.Modules.Boc
         /// <remarks>
         ///     JSON structure is compatible with GraphQL API message object.
         /// </remarks>
-        public Task<ResultOfParse> ParseAccount(ParamsOfParse @params);
+        Task<ResultOfParse> ParseAccount(ParamsOfParse @params);
 
         /// <summary>
         ///     Parses block boc into a JSON.
@@ -38,7 +38,7 @@ namespace TonSdk.Modules.Boc
         /// <remarks>
         ///     JSON structure is compatible with GraphQL API message object.
         /// </remarks>
-        public Task<ResultOfParse> ParseBlock(ParamsOfParse @params);
+        Task<ResultOfParse> ParseBlock(ParamsOfParse @params);
 
         /// <summary>
         ///     Parses shardstate boc into a JSON.
@@ -46,32 +46,37 @@ namespace TonSdk.Modules.Boc
         /// <remarks>
         ///     JSON structure is compatible with GraphQL API shardstate object.
         /// </remarks>
-        public Task<ResultOfParse> ParseShardstate(ParamsOfParseShardState @params);
+        Task<ResultOfParse> ParseShardstate(ParamsOfParseShardState @params);
 
         /// <summary>
         ///     Extract blockchain configuration from key block and also from zerostate.
         /// </summary>
-        public Task<ResultOfGetBlockchainConfig> GetBlockchainConfig(ParamsOfGetBlockchainConfig @params);
+        Task<ResultOfGetBlockchainConfig> GetBlockchainConfig(ParamsOfGetBlockchainConfig @params);
 
         /// <summary>
         ///     Calculates BOC root hash.
         /// </summary>
-        public Task<ResultOfGetBocHash> GetBocHash(ParamsOfGetBocHash @params);
+        Task<ResultOfGetBocHash> GetBocHash(ParamsOfGetBocHash @params);
+
+        /// <summary>
+        ///     Calculates BOC depth.
+        /// </summary>
+        Task<ResultOfGetBocDepth> GetBocDepth(ParamsOfGetBocDepth @params);
 
         /// <summary>
         ///     Extracts code from TVC contract image.
         /// </summary>
-        public Task<ResultOfGetCodeFromTvc> GetCodeFromTvc(ParamsOfGetCodeFromTvc @params);
+        Task<ResultOfGetCodeFromTvc> GetCodeFromTvc(ParamsOfGetCodeFromTvc @params);
 
         /// <summary>
         ///     Get BOC from cache.
         /// </summary>
-        public Task<ResultOfBocCacheGet> CacheGet(ParamsOfBocCacheGet @params);
+        Task<ResultOfBocCacheGet> CacheGet(ParamsOfBocCacheGet @params);
 
         /// <summary>
         ///     Save BOC into cache.
         /// </summary>
-        public Task<ResultOfBocCacheSet> CacheSet(ParamsOfBocCacheSet @params);
+        Task<ResultOfBocCacheSet> CacheSet(ParamsOfBocCacheSet @params);
 
         /// <summary>
         ///     Unpin BOCs with specified pin.
@@ -79,7 +84,7 @@ namespace TonSdk.Modules.Boc
         /// <remarks>
         ///     BOCs which don't have another pins will be removed from cache.
         /// </remarks>
-        public Task CacheUnpin(ParamsOfBocCacheUnpin @params);
+        Task CacheUnpin(ParamsOfBocCacheUnpin @params);
 
         /// <summary>
         ///     Encodes BOC from builder operations.
@@ -92,8 +97,7 @@ namespace TonSdk.Modules.Boc
         ///     Resulting BOC of this method can be passed into
         ///     Solidity and C++ contracts as TvmCell type.
         /// </remarks>
-        public Task<ResultOfEncodeBoc> EncodeBoc(ParamsOfEncodeBoc @params);
-
+        Task<ResultOfEncodeBoc> EncodeBoc(ParamsOfEncodeBoc @params);
 
         /// <summary>
         ///     Returns the contract code's salt if it is present.

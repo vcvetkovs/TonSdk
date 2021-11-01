@@ -11,6 +11,7 @@
             public const string ParseShardState = "boc.parse_shardstate";
             public const string GetBlockchainConfig = "boc.get_blockchain_config";
             public const string GetBocHash = "boc.get_boc_hash";
+            public const string GetBocDepth = "boc.get_boc_depth";
             public const string GetCodeFromTvc = "boc.get_code_from_tvc";
             public const string CacheGet = "boc.cache_get";
             public const string CacheSet = "boc.cache_set";
