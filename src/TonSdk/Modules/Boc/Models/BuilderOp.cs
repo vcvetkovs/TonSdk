@@ -85,5 +85,16 @@ namespace TonSdk.Modules.Boc.Models
             /// </summary>
             public string Boc { get; set; }
         }
+
+        /// <summary>
+        ///     Address.
+        /// </summary>
+        public class Address : BuilderOp
+        {
+            /// <summary>
+            ///     Address.
+            /// </summary>
+            public string AddressAccessor { get; set; }
+        }
     }
 }

@@ -14,5 +14,6 @@
         DebotExternalCallFailed = 810,
         DebotBrowserCallbackFailed = 811,
         DebotOperationRejected = 812,
+        DebotNoCode = 813,
     }
 }

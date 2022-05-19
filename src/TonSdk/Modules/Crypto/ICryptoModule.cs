@@ -257,9 +257,71 @@ namespace TonSdk.Modules.Crypto
         Task<ResultOfHDKeyPublicFromXPrv> HDKeyPublicFromXPrv(ParamsOfHDKeyPublicFromXPrv @params);
 
         /// <summary>
-        ///     Performs symmetric `chacha20` encryption.
+        ///     Performs symmetric <c>chacha20</c> encryption.
         /// </summary>
         Task<ResultOfHDKeyPublicFromXPrv> Chacha20(ParamsOfHDKeyPublicFromXPrv @params);
+
+        /// <summary>
+        ///     Creates a Crypto Box instance. <para/>
+        ///     
+        ///     Crypto Box is a root crypto object, that encapsulates some
+        ///     secret (seed phrase usually) in encrypted form and acts as
+        ///     a factory for all crypto primitives used in SDK:
+        ///     keys for signing and encryption, derived from this secret. <para/>
+        ///     
+        ///     Crypto Box encrypts original Seed Phrase with salt and password
+        ///     that is retrieved from <c>password_provider</c> callback,
+        ///     implemented on Application side. <para/>
+        ///     
+        ///     When used, decrypted secret shows up in core library's memory
+        ///     for a very short period of time and then is immediately
+        ///     overwritten with zeroes.
+        /// </summary>
+        Task<RegisteredCryptoBox> CreateCryptoBox(ParamsOfCreateCryptoBox @params);
+
+        /// <summary>
+        ///     Removes Crypto Box.
+        ///     Clears all secret data.
+        /// </summary>
+        Task RemoveCryptoBox(RegisteredCryptoBox @params);
+
+        /// <summary>
+        ///     Get Crypto Box Info.
+        ///     Used to get <see cref="CryptoBoxSecret.EncryptedSecret"/> that
+        ///     should be used for all the cryptobox initializations except
+        ///     the first one.
+        /// </summary>
+        Task<ResultOfGetCryptoBoxInfo> GetCryptoBoxInfo(RegisteredCryptoBox @params);
+
+        /// <summary>
+        ///     Get Crypto Box Seed Phrase.
+        ///     Attention! Store this data in your application for a very short
+        ///     period of time and overwrite it with zeroes ASAP.
+        /// </summary>
+        Task<ResultOfGetCryptoBoxSeedPhrase> GetCryptoBoxSeedPhrase(RegisteredCryptoBox @params);
+
+        /// <summary>
+        ///     Get handle of Signing Box derived from Crypto Box.
+        /// </summary>
+        Task<RegisteredSigningBox> GetSigningBoxFromCryptoBox(ParamsOfGetSigningBoxFromCryptoBox @params);
+
+        /// <summary>
+        ///     Gets Encryption Box from Crypto Box.
+        ///     Derives encryption keypair from cryptobox secret and hdpath and
+        ///     stores it in cache for <c>secret_lifetime</c> or until
+        ///     explicitly cleared by
+        ///     <see cref="ClearCryptoBoxSecretCache(RegisteredCryptoBox)"/>
+        ///     method.
+        ///     If `secret_lifetime` is not specified - overwrites encryption
+        ///     secret with zeroes immediately after encryption operation.
+        /// </summary>
+        Task<RegisteredEncryptionBox> GetEncryptionBoxFromCryptoBox(ParamsOfGetEncryptionBoxFromCryptoBox @params);
+
+        /// <summary>
+        ///     Removes cached secrets (overwrites with zeroes) from all signing
+        ///     and encryption boxes, derived from crypto box.
+        /// </summary>
+        Task ClearCryptoBoxSecretCache(RegisteredCryptoBox @params);
 
         /// <summary>
         ///     Register an application implemented signing box.

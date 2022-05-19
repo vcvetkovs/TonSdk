@@ -29,5 +29,9 @@
         EncryptDataError = 127,
         DecryptDataError = 128,
         IvRequired = 129,
+        CryptoBoxNotRegistered = 130,
+        InvalidCryptoBoxType = 131,
+        CryptoBoxSecretSerializationError = 132,
+        CryptoBoxSecretDeserializationError = 133,
     }
 }

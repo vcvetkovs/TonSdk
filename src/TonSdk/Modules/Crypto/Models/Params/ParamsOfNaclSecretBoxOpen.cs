@@ -16,7 +16,7 @@
         public string Nonce { get; set; }
 
         /// <summary>
-        ///     Public key - unprefixed 0-padded to 64 symbols hex string.
+        ///     Secret key - unprefixed 0-padded to 64 symbols hex string.
         /// </summary>
         public string Key { get; set; }
     }

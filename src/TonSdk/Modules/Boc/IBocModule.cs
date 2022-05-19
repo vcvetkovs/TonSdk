@@ -123,5 +123,11 @@ namespace TonSdk.Modules.Boc
         ///     Returns the compiler version used to compile the code.
         /// </summary>
         Task<ResultOfGetCompilerVersion> GetCompilerVersion(ParamsOfGetCompilerVersion @params);
+
+        /// <summary>
+        ///     Encodes a message.
+        ///     Allows to encode any external inbound message.
+        /// </summary>
+        Task<ResultOfEncodeExternalInMessage> EncodeExternalInMessage(ParamsOfEncodeExternalInMessage @params);
     }
 }

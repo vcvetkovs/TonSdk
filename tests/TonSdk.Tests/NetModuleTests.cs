@@ -130,7 +130,6 @@ namespace TonSdk.Tests
                 Collection = "transactions",
                 Filter = new
                 {
-                    //account_addr = new { eq = "" },
                     status = new { eq = 3 }
                 },
                 Result = "id account_addr"

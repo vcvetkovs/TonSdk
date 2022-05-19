@@ -18,6 +18,7 @@ using TonSdk.Modules.Crypto;
 using TonSdk.Modules.Debot;
 using TonSdk.Modules.Net;
 using TonSdk.Modules.Processing;
+using TonSdk.Modules.Proofs;
 using TonSdk.Modules.Tvm;
 using TonSdk.Modules.Utils;
 
@@ -41,6 +42,7 @@ namespace TonSdk
         public IProcessingModule Processing { get; set; }
         public ITvmModule Tvm { get; set; }
         public IUtilsModule Utils { get; set; }
+        public IProofsModule Proofs { get; set; }
 
         public TonClient(
             ClientConfig? clientConfig = null,
@@ -52,7 +54,8 @@ namespace TonSdk
             INetModule? netModule = null,
             IProcessingModule? processingModule = null,
             ITvmModule? tvmModule = null,
-            IUtilsModule? utilsModule = null)
+            IUtilsModule? utilsModule = null,
+            IProofsModule? proofsModule = null)
         {
             JsonSerializerOptions = new JsonSerializerOptions
             {
@@ -61,6 +64,7 @@ namespace TonSdk
                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
                 MaxDepth = 1000
             };
+            JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             _context = CreateContext(clientConfig);
 
             Abi = abiModule ?? new AbiModule(this);
@@ -71,6 +75,7 @@ namespace TonSdk
             Processing = processingModule ?? new ProcessingModule(this);
             Tvm = tvmModule ?? new TvmModule(this);
             Utils = utilsModule ?? new UtilsModule(this);
+            Proofs = proofsModule ?? new ProofsModule(this);
         }
 
         public Task CallFunction(string name, object? @params = null)
@@ -94,17 +99,7 @@ namespace TonSdk
         {
             var result = new TaskCompletionSource<T>();
             var callbackHandle = default(GCHandle);
-
-            var serializedParams = Serialize(@params) ?? "";
-            using var methodNameInteropString = InteropString.Create(name);
-            using var paramsJsonInteropString = InteropString.Create(serializedParams);
-            var tcs = new TaskCompletionSource<string>();
-            var handler = TonAdapter.tc_request(
-                _context,
-                methodNameInteropString,
-                paramsJsonInteropString,
-                ++_requestIndex,
-                (requestId, resultJsonData, responseType, isFinished) =>
+            var responeHandler = new TonAdapter.ResponseHandler((requestId, resultJsonData, responseType, isFinished) =>
                 {
                     try
                     {
@@ -140,7 +135,19 @@ namespace TonSdk
                         }
                     }
                 });
-            callbackHandle = GCHandle.Alloc(handler);
+            callbackHandle = GCHandle.Alloc(responeHandler);
+
+            var serializedParams = Serialize(@params) ?? "";
+            using var methodNameInteropString = InteropString.Create(name);
+            using var paramsJsonInteropString = InteropString.Create(serializedParams);
+            var tcs = new TaskCompletionSource<string>();
+            var handler = TonAdapter.tc_request(
+                _context,
+                methodNameInteropString,
+                paramsJsonInteropString,
+                ++_requestIndex,
+                responeHandler
+            );
 
             return result.Task;
         }

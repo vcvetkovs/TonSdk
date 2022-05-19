@@ -2,16 +2,16 @@
 
 namespace TonSdk.Common.Helpers
 {
-    public static class StringHelper
+    public static class StringExtensions
     {
-        public static string ToCamelCase(string s)
+        public static string ToCamelCase(this string text)
         {
-            if (string.IsNullOrEmpty(s) || !char.IsUpper(s[0]))
+            if (string.IsNullOrEmpty(text) || !char.IsUpper(text[0]))
             {
-                return s;
+                return text;
             }
 
-            char[] chars = s.ToCharArray();
+            char[] chars = text.ToCharArray();
 
             for (int i = 0; i < chars.Length; i++)
             {
@@ -45,19 +45,19 @@ namespace TonSdk.Common.Helpers
             return new string(chars);
         }
 
-        private static char ToLower(char c)
+        private static char ToLower(this char character)
         {
 #if HAVE_CHAR_TO_LOWER_WITH_CULTURE
-            c = char.ToLower(c, CultureInfo.InvariantCulture);
+            character = char.ToLower(character, CultureInfo.InvariantCulture);
 #else
-            c = char.ToLowerInvariant(c);
+            character = char.ToLowerInvariant(character);
 #endif
-            return c;
+            return character;
         }
 
-        public static string ToSnakeCase(string s) => ToSeparatedCase(s, '_');
+        public static string ToSnakeCase(this string text) => ToSeparatedCase(text, '_');
 
-        public static string ToKebabCase(string s) => ToSeparatedCase(s, '-');
+        public static string ToKebabCase(this string text) => ToSeparatedCase(text, '-');
 
         private enum SeparatedCaseState
         {
@@ -67,34 +67,34 @@ namespace TonSdk.Common.Helpers
             NewWord
         }
 
-        private static string ToSeparatedCase(string s, char separator)
+        private static string ToSeparatedCase(this string text, char separator)
         {
-            if (string.IsNullOrEmpty(s))
+            if (string.IsNullOrEmpty(text))
             {
-                return s;
+                return text;
             }
 
             StringBuilder sb = new StringBuilder();
             SeparatedCaseState state = SeparatedCaseState.Start;
 
-            for (int i = 0; i < s.Length; i++)
+            for (int i = 0; i < text.Length; i++)
             {
-                if (s[i] == ' ')
+                if (text[i] == ' ')
                 {
                     if (state != SeparatedCaseState.Start)
                     {
                         state = SeparatedCaseState.NewWord;
                     }
                 }
-                else if (char.IsUpper(s[i]))
+                else if (char.IsUpper(text[i]))
                 {
                     switch (state)
                     {
                         case SeparatedCaseState.Upper:
-                            bool hasNext = (i + 1 < s.Length);
+                            bool hasNext = (i + 1 < text.Length);
                             if (i > 0 && hasNext)
                             {
-                                char nextChar = s[i + 1];
+                                char nextChar = text[i + 1];
                                 if (!char.IsUpper(nextChar) && nextChar != separator)
                                 {
                                     sb.Append(separator);
@@ -107,17 +107,17 @@ namespace TonSdk.Common.Helpers
                             break;
                     }
 
-                    char c;
+                    char character;
 #if HAVE_CHAR_TO_LOWER_WITH_CULTURE
                     c = char.ToLower(s[i], CultureInfo.InvariantCulture);
 #else
-                    c = char.ToLowerInvariant(s[i]);
+                    character = char.ToLowerInvariant(text[i]);
 #endif
-                    sb.Append(c);
+                    sb.Append(character);
 
                     state = SeparatedCaseState.Upper;
                 }
-                else if (s[i] == separator)
+                else if (text[i] == separator)
                 {
                     sb.Append(separator);
                     state = SeparatedCaseState.Start;
@@ -129,7 +129,7 @@ namespace TonSdk.Common.Helpers
                         sb.Append(separator);
                     }
 
-                    sb.Append(s[i]);
+                    sb.Append(text[i]);
                     state = SeparatedCaseState.Lower;
                 }
             }

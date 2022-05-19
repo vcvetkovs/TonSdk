@@ -28,12 +28,13 @@ namespace TonSdk.Modules.Tvm.Models
         public ExecutionOptions? ExecutionOptions { get; set; }
 
         /// <summary>
-        ///     Contract ABI for dedcoding output messages
+        ///     Contract ABI for dedcoding output messages.
         /// </summary>
+        [JsonConverter(typeof(PolymorphicTypeJsonConverter))]
         public Abi.Models.Abi? Abi { get; set; }
 
         /// <summary>
-        ///     The BOC itself returned if no cache type provided
+        ///     The BOC itself returned if no cache type provided.
         /// </summary>
         [JsonConverter(typeof(PolymorphicTypeJsonConverter))]
         public BocCacheType BocCache { get; set; }

@@ -15,12 +15,14 @@ namespace TonSdk.Modules.Net
 
         public Task<ResultOfQueryCollection> QueryCollection(ParamsOfQueryCollection @params)
         {
-            return _client.CallFunction<ResultOfQueryCollection>(Consts.Commands.QueryCollection, @params);
+            return _client
+                .CallFunction<ResultOfQueryCollection>(Consts.Commands.QueryCollection, @params);
         }
 
         public Task<ResultOfWaitForCollection> WaitForCollection(ParamsOfWaitForCollection @params)
         {
-            return _client.CallFunction<ResultOfWaitForCollection>(Consts.Commands.WaitForCollection, @params);
+            return _client
+                .CallFunction<ResultOfWaitForCollection>(Consts.Commands.WaitForCollection, @params);
         }
 
         public AsyncDataStream<string> SubscribeCollection(ParamsOfSubscribeCollection @params)
@@ -32,94 +34,121 @@ namespace TonSdk.Modules.Net
                     Unsubscribe);
         }
 
+        public AsyncDataStream<string> Subscribe(ParamsOfSubscribe @params)
+        {
+            return _client
+                .SubscribeToFunction<ResultOfSubscribeCollection>(
+                    Consts.Commands.Subscribe,
+                    @params,
+                    Unsubscribe);
+        }
+
         public Task<ResultOfQuery> Query(ParamsOfQuery @params)
         {
-            return _client.CallFunction<ResultOfQuery>(Consts.Commands.Query, @params);
+            return _client
+                .CallFunction<ResultOfQuery>(Consts.Commands.Query, @params);
         }
 
         public Task<ResultOfBatchQuery> BatchQuery(ParamsOfBatchQuery @params)
         {
-            return _client.CallFunction<ResultOfBatchQuery>(Consts.Commands.BatchQuery, @params);
+            return _client
+                .CallFunction<ResultOfBatchQuery>(Consts.Commands.BatchQuery, @params);
         }
 
         public Task<ResultOfAggregateCollection> AggregateCollection(ParamsOfAggregateCollection @params)
         {
-            return _client.CallFunction<ResultOfAggregateCollection>(Consts.Commands.AggregateCollection, @params);
+            return _client
+                .CallFunction<ResultOfAggregateCollection>(Consts.Commands.AggregateCollection, @params);
         }
 
         public Task Suspend()
         {
-            return _client.CallFunction(Consts.Commands.Suspend);
+            return _client
+                .CallFunction(Consts.Commands.Suspend);
         }
 
         public Task Resume()
         {
-            return _client.CallFunction(Consts.Commands.Resume);
+            return _client
+                .CallFunction(Consts.Commands.Resume);
         }
 
         public Task<ResultOfFindLastShardBlock> FindLastShardBlock(ParamsOfFindLastShardBlock @params)
         {
-            return _client.CallFunction<ResultOfFindLastShardBlock>(Consts.Commands.FindLastShardBlock, @params);
+            return _client
+                .CallFunction<ResultOfFindLastShardBlock>(Consts.Commands.FindLastShardBlock, @params);
         }
 
         public Task<EndpointsSet> FetchEndpoints()
         {
-            return _client.CallFunction<EndpointsSet>(Consts.Commands.FetchEndpoints);
+            return _client
+                .CallFunction<EndpointsSet>(Consts.Commands.FetchEndpoints);
         }
 
         public Task SetEndpoints(EndpointsSet @params)
         {
-            return _client.CallFunction<ResultOfBatchQuery>(Consts.Commands.SetEndpoints, @params);
+            return _client
+                .CallFunction<ResultOfBatchQuery>(Consts.Commands.SetEndpoints, @params);
         }
 
         private Task Unsubscribe(ResultOfSubscribeCollection @params)
         {
-            return _client.CallFunction<ResultOfQueryCollection>(Consts.Commands.Unsubscribe, @params);
+            return _client
+                .CallFunction<ResultOfQueryCollection>(Consts.Commands.Unsubscribe, @params);
         }
 
-        public async Task<ResultOfGetEndpoints> GetEndpoints()
+        public Task<ResultOfGetEndpoints> GetEndpoints()
         {
-            return await _client.CallFunction<ResultOfGetEndpoints>(Consts.Commands.GetEndpoints);
+            return _client
+                .CallFunction<ResultOfGetEndpoints>(Consts.Commands.GetEndpoints);
         }
 
-        public async Task<ResultOfQueryCollection> QueryCounterparties(ParamsOfQueryCounterparties @params)
+        public Task<ResultOfQueryCollection> QueryCounterparties(ParamsOfQueryCounterparties @params)
         {
-            return await _client.CallFunction<ResultOfQueryCollection>(Consts.Commands.QueryCounterparties, @params);
+            return _client
+                .CallFunction<ResultOfQueryCollection>(Consts.Commands.QueryCounterparties, @params);
         }
 
-        public async Task<ResultOfQueryTransactionTree> QueryTransactionTree(ParamsOfQueryTransactionTree @params)
+        public Task<ResultOfQueryTransactionTree> QueryTransactionTree(ParamsOfQueryTransactionTree @params)
         {
-            return await _client.CallFunction<ResultOfQueryTransactionTree>(Consts.Commands.QueryTransactionTree, @params);
+            return _client
+                .CallFunction<ResultOfQueryTransactionTree>(Consts.Commands.QueryTransactionTree, @params);
         }
 
-        public async Task<RegisteredIterator> CreateBlockIterator(ParamsOfCreateBlockIterator @params)
+        public Task<RegisteredIterator> CreateBlockIterator(ParamsOfCreateBlockIterator @params)
         {
-            return await _client.CallFunction<RegisteredIterator>(Consts.Commands.CreateBlockIterator, @params);
+            return _client
+                .CallFunction<RegisteredIterator>(Consts.Commands.CreateBlockIterator, @params);
         }
 
-        public async Task<RegisteredIterator> ResumeBlockIterator(ParamsOfResumeBlockIterator @params)
+        public Task<RegisteredIterator> ResumeBlockIterator(ParamsOfResumeBlockIterator @params)
         {
-            return await _client.CallFunction<RegisteredIterator>(Consts.Commands.ResumeBlockIterator, @params);
+            return _client
+                .CallFunction<RegisteredIterator>(Consts.Commands.ResumeBlockIterator, @params);
         }
 
-        public async Task<RegisteredIterator> CreateTransactionIterator(ParamsOfCreateTransactionIterator @params)
+        public Task<RegisteredIterator> CreateTransactionIterator(ParamsOfCreateTransactionIterator @params)
         {
-            return await _client.CallFunction<RegisteredIterator>(Consts.Commands.CreateTransactionIterator, @params);
+            return _client
+                .CallFunction<RegisteredIterator>(Consts.Commands.CreateTransactionIterator, @params);
         }
 
-        public async Task<RegisteredIterator> ResumeTransactionIterator(ParamsOfResumeTransactionIterator @params)
+        public Task<RegisteredIterator> ResumeTransactionIterator(ParamsOfResumeTransactionIterator @params)
         {
-            return await _client.CallFunction<RegisteredIterator>(Consts.Commands.ResumeTransactionIterator, @params);
+            return _client
+                .CallFunction<RegisteredIterator>(Consts.Commands.ResumeTransactionIterator, @params);
         }
 
-        public async Task<ResultOfIteratorNext> IteratorNext(ParamsOfIteratorNext @params)
+        public Task<ResultOfIteratorNext> IteratorNext(ParamsOfIteratorNext @params)
         {
-            return await _client.CallFunction<ResultOfIteratorNext>(Consts.Commands.IteratorNext, @params);
+            return _client
+                .CallFunction<ResultOfIteratorNext>(Consts.Commands.IteratorNext, @params);
         }
 
         public async Task RemoveIterator(RegisteredIterator @params)
         {
-            await _client.CallFunction(Consts.Commands.RemoveIterator, @params);
+            await _client
+                .CallFunction(Consts.Commands.RemoveIterator, @params);
         }
     }
 }

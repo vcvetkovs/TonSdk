@@ -37,6 +37,13 @@
             public const string HDKeySecretFromXPrv = "crypto.hdkey_secret_from_xprv";
             public const string HDKeyPublicFromXPrv = "crypto.hdkey_public_from_xprv";
             public const string Chacha20 = "crypto.chacha20";
+            public const string CreateCryptoBox = "crypto.create_crypto_box";
+            public const string RemoveCryptoBox = "crypto.remove_crypto_box";
+            public const string GetCryptoBoxInfo = "crypto.get_crypto_box_info";
+            public const string GetCryptoBoxSeedPhrase = "crypto.get_crypto_box_seed_phrase";
+            public const string GetSigningBoxFromCryptoBox = "crypto.get_signing_box_from_crypto_box";
+            public const string GetEncryptionBoxFromCryptoBox = "crypto.get_encryption_box_from_crypto_box";
+            public const string ClearCryptoBoxSecretCache = "crypto.clear_crypto_box_secret_cache";
             public const string RegisterSigningBox = "crypto.register_signing_box";
             public const string GetSigningBox = "crypto.get_signing_box";
             public const string SigningBoxGetPublicKey = "crypto.signing_box_get_public_key";

@@ -185,6 +185,40 @@ namespace TonSdk.Modules.Crypto
             return _client.CallFunction<ResultOfHDKeyPublicFromXPrv>(Consts.Commands.Chacha20, @params);
         }
 
+        public async Task<RegisteredCryptoBox> CreateCryptoBox(ParamsOfCreateCryptoBox @params)
+        {
+            return await _client.CallFunction<RegisteredCryptoBox, JsonElement>(Consts.Commands.CreateCryptoBox, @params);
+        }
+
+        public async Task RemoveCryptoBox(RegisteredCryptoBox @params)
+        {
+            await _client.CallFunction<RegisteredCryptoBox>(Consts.Commands.RemoveCryptoBox, @params);
+        }
+
+        public async Task<ResultOfGetCryptoBoxInfo> GetCryptoBoxInfo(RegisteredCryptoBox @params)
+        {
+            return await _client.CallFunction<ResultOfGetCryptoBoxInfo>(Consts.Commands.GetCryptoBoxInfo, @params);
+        }
+
+        public async Task<ResultOfGetCryptoBoxSeedPhrase> GetCryptoBoxSeedPhrase(RegisteredCryptoBox @params)
+        {
+            return await _client.CallFunction<ResultOfGetCryptoBoxSeedPhrase>(Consts.Commands.GetCryptoBoxSeedPhrase, @params);
+        }
+
+        public async Task<RegisteredSigningBox> GetSigningBoxFromCryptoBox(ParamsOfGetSigningBoxFromCryptoBox @params)
+        {
+            return await _client.CallFunction<RegisteredSigningBox>(Consts.Commands.GetSigningBoxFromCryptoBox, @params);
+        }
+
+        public async Task<RegisteredEncryptionBox> GetEncryptionBoxFromCryptoBox(ParamsOfGetEncryptionBoxFromCryptoBox @params)
+        {
+            return await _client.CallFunction<RegisteredEncryptionBox>(Consts.Commands.ClearCryptoBoxSecretCache, @params);
+        }
+
+        public async Task ClearCryptoBoxSecretCache(RegisteredCryptoBox @params)
+        {
+            await _client.CallFunction<RegisteredCryptoBox>(Consts.Commands.ClearCryptoBoxSecretCache, @params);
+        }
         public Task<RegisteredSigningBox> RegisterSigningBox(Action<JsonElement, uint> callback = null)
         {
             return _client.CallFunction<RegisteredSigningBox>(Consts.Commands.RegisterSigningBox, callback);

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Text.Json;
+using System.Threading.Tasks;
 using TonSdk.Modules.Abi.Models;
 
 namespace TonSdk.Modules.Abi
@@ -25,10 +26,10 @@ namespace TonSdk.Modules.Abi
                 .CallFunction<ResultOfAttachSignatureToMessageBody>(Consts.Commands.AttachSignatureToMessageBody, @params);
         }
 
-        public Task<ResultOfDecodeData> DecodeAccountData(ParamsOfDecodeAccountData @params)
+        public Task<ResultOfDecodeAccountData> DecodeAccountData(ParamsOfDecodeAccountData @params)
         {
             return _client
-                .CallFunction<ResultOfDecodeData>(Consts.Commands.DecodeAccountData, @params);
+                .CallFunction<ResultOfDecodeAccountData>(Consts.Commands.DecodeAccountData, @params);
         }
 
         public Task<DecodedMessageBody> DecodeMessage(ParamsOfDecodeMessage @params)
@@ -77,6 +78,24 @@ namespace TonSdk.Modules.Abi
         {
             return _client
                 .CallFunction<ResultOfDecodeInitialData>(Consts.Commands.DecodeInitialData, @params);
+        }
+
+        public Task<ResultOfEncodeInitialData> EncodeInitialData(ParamsOfEncodeInitialData @params)
+        {
+            return _client
+                .CallFunction<ResultOfEncodeInitialData>(Consts.Commands.EncodeInitialData, @params);
+        }
+
+        public Task<ResultOfDecodeBoc> DecodeBoc(ParamsOfDecodeBoc @params)
+        {
+            return _client
+                .CallFunction<ResultOfDecodeBoc>(Consts.Commands.DecodeBoc, @params);
+        }
+
+        public Task<ResultOfAbiEncodeBoc> EncodeBoc(ParamsOfAbiEncodeBoc @params)
+        {
+            return _client
+                .CallFunction<ResultOfAbiEncodeBoc>(Consts.Commands.EncodeBoc, @params);
         }
     }
 }

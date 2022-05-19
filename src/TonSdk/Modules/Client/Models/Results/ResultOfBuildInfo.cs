@@ -15,7 +15,7 @@ namespace TonSdk.Modules.Client.Models
         public BuildInfoDependency[] Dependencies { get; set; }
     }
 
-    public class BuildInfoDependency
+    public struct BuildInfoDependency
     {
         /// <summary>
         ///     Usually it is a crate name.

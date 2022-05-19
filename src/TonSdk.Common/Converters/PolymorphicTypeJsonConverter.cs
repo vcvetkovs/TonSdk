@@ -69,13 +69,13 @@ namespace TonSdk.Common.Converters
 			foreach (var prop in props)
 			{
 				var propName = prop.GetCustomAttribute<JsonPropertyNameAttribute>()?.Name
-					?? StringHelper.ToSnakeCase(prop.Name);
+					?? prop.Name.ToSnakeCase();
 				var propValue = prop.GetValue(value);
 
 				switch (propValue)
 				{
 					case string convertedValue:
-						writer.WriteString(propName, StringHelper.ToSnakeCase(convertedValue));
+						writer.WriteString(propName, convertedValue.ToSnakeCase());
 						break;
 					case bool convertedValue:
 						writer.WriteBoolean(propName, convertedValue);

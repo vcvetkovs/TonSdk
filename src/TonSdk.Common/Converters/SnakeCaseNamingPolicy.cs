@@ -10,7 +10,7 @@ namespace TonSdk.Common.Converters
 
         public override string ConvertName(string name)
         {
-            return StringHelper.ToSnakeCase(name);
+            return name.ToSnakeCase();
         }
     }
 }

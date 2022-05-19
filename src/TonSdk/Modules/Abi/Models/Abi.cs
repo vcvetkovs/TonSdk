@@ -1,4 +1,7 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using TonSdk.Common.Converters;
 
 namespace TonSdk.Modules.Abi.Models
@@ -23,6 +26,29 @@ namespace TonSdk.Modules.Abi.Models
 
         public class Serialized : Abi
         {
+            public Serialized() { }
+            public Serialized(byte[] abi)
+            {
+                SetProperties(Encoding.UTF8.GetString(abi));
+            }
+            public Serialized(string abi)
+            {
+                SetProperties(abi);
+            }
+
+            private void SetProperties(string abi)
+            {
+                Value = JsonSerializer.Deserialize<AbiContract>(
+                    abi,
+                    new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true,
+                        PropertyNamingPolicy = new SnakeCaseNamingPolicy(),
+                        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+                    }
+                ) ?? throw new ArgumentException($"Could not initialize contract -> {abi}");
+            }
+
             [JsonConverter(typeof(PolymorphicTypeJsonConverter))]
             public AbiContract Value { get; set; }
         }

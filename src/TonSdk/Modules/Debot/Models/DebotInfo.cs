@@ -59,5 +59,10 @@
         ///     Vector with IDs of DInterfaces used by DeBot.
         /// </summary>
         public string[] Interfaces { get; set; }
+
+        /// <summary>
+        ///     ABI version ("x.y") supported by DeBot.
+        /// </summary>
+        public string DabiVersion { get; set; }
     }
 }

@@ -56,7 +56,7 @@ namespace TonSdk.Modules.Net
         Task<ResultOfWaitForCollection> WaitForCollection(ParamsOfWaitForCollection @params);
 
         /// <summary>
-        ///     Creates a subscription
+        ///     Creates a collection subscription.
         /// </summary>
         /// <remarks>
         ///     Triggers for each insert/update of data that satisfies
@@ -121,6 +121,65 @@ namespace TonSdk.Modules.Net
         ///  <para/>
         /// </remarks>
         AsyncDataStream<string> SubscribeCollection(ParamsOfSubscribeCollection @params);
+
+        /// <summary>
+        ///     Creates a subscription.
+        /// </summary>
+        /// <remarks>
+        ///     The subscription is a persistent communication channel between
+        ///     client and Everscale Network. <para />
+        /// 
+        ///     <c>Important Notes on Subscriptions</c> <para />
+        ///     
+        ///     Unfortunately sometimes the connection with the network brakes down.
+        ///     In this situation the library attempts to reconnect to the network.
+        ///     This reconnection sequence can take significant time.
+        ///     All of this time the client is disconnected from the network. <para />
+        ///     
+        ///     Bad news is that all changes that happened while
+        ///     the client was disconnected are lost. <para />
+        ///     
+        ///     Good news is that the client report errors to the callback when
+        ///     it loses and resumes connection. <para />
+        ///
+        ///     So, if the lost changes are important to the application then
+        ///     the application must handle these error reports. <para />
+        ///
+        ///     Library reports errors with <c>responseType</c> == 101
+        ///     and the error object passed via <c>params</c>. <para />
+        ///     
+        ///     When the library has successfully reconnected
+        ///     the application receives callback with
+        ///     <c>responseType</c> == 101
+        ///     and <c>params.code</c> == 614 (NetworkModuleResumed). <para />
+        ///
+        ///     Application can use several ways to handle this situation:
+        ///     <list type="bullet">
+        ///         <item>
+        ///             <term>
+        ///                 If application monitors changes for the single
+        ///                 object (for example specific account)
+        ///             </term>
+        ///             <description>
+        ///                 application can perform a query for this object and
+        ///                 handle actual data as a regular data from the
+        ///                 subscription.
+        ///             </description>
+        ///         </item>
+        ///         <item>
+        ///             <term>
+        ///                 If application monitors sequence of some objects
+        ///                 (for example transactions of the specific account)
+        ///             </term>
+        ///             <description>
+        ///                 application must refresh all cached
+        ///                 (or visible to user) lists where this sequences
+        ///                 presents.
+        ///             </description>
+        ///         </item>
+        ///     </list>
+        /// </remarks>
+        AsyncDataStream<string> Subscribe(ParamsOfSubscribe @params);
 
         /// <summary>
         ///     Suspends network module to stop any network activity.

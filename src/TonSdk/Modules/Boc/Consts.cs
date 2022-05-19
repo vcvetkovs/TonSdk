@@ -22,6 +22,7 @@
             public const string DecodeTvc = "boc.decode_tvc";
             public const string EncodeTvc = "boc.encode_tvc";
             public const string GetCompilerVersion = "boc.get_compiler_version";
+            public const string EncodeExternalInMessage = "boc.encode_external_in_message";
         }
     }
 }

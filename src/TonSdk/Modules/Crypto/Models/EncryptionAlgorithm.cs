@@ -1,7 +1,13 @@
 ﻿namespace TonSdk.Modules.Crypto.Models
 {
-    public abstract class EncryptionAlgorithm
+    public struct EncryptionAlgorithm
     {
-        public AesParams AES { get; set; }
+        public AesParamsEB AES { get; set; }
+
+        public ChaCha20ParamsEB ChaCha20 { get; set; }
+
+        public NaclBoxParamsEB NaclBox { get; set; }
+
+        public NaclSecretBoxParamsEB NaclSecretBox { get; set; }
     }
 }

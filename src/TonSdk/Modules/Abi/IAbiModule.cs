@@ -12,7 +12,9 @@ namespace TonSdk.Modules.Abi
         ///     Combines <c>hex</c>-encoded <see cref="ParamsOfAttachSignature.Signature"/>
         ///     with <c>base64</c>-encoded <see cref="ParamsOfAttachSignature.Message"/>.
         /// </summary>
-        /// <returns>Signed message encoded in <c>base64</c>.</returns>
+        /// <returns>
+        ///     Signed message encoded in <c>base64</c>.
+        /// </returns>
         Task<ResultOfAttachSignature> AttachSignature(ParamsOfAttachSignature @params);
 
         Task<ResultOfAttachSignatureToMessageBody> AttachSignatureToMessageBody(
@@ -21,7 +23,7 @@ namespace TonSdk.Modules.Abi
         /// <summary>
         ///     Note: this feature requires ABI 2.1 or higher.
         /// </summary>
-        Task<ResultOfDecodeData> DecodeAccountData(ParamsOfDecodeAccountData @params);
+        Task<ResultOfDecodeAccountData> DecodeAccountData(ParamsOfDecodeAccountData @params);
 
         /// <summary>
         ///     Decodes message body using provided message BOC and ABI.
@@ -164,5 +166,41 @@ namespace TonSdk.Modules.Abi
         ///     contain this data section any more.
         /// </remarks>
         Task<ResultOfDecodeInitialData> DecodeInitialData(ParamsOfDecodeInitialData @params);
+
+        /// <summary>
+        ///     Encodes initial account data with initial values for the contract's static variables
+        ///     and owner's public key into a data BOC that can be passed to
+        ///     <see cref="Modules.Boc.IBocModule.EncodeTvc(Boc.Models.ParamsOfEncodeTvc)"/> function afterwards.
+        ///     This function is analogue of <c>tvm.buildDataInit</c> function in Solidity.
+        /// </summary>
+        Task<ResultOfEncodeInitialData> EncodeInitialData(ParamsOfEncodeInitialData @params);
+
+        /// <summary>
+        ///     Decodes BOC into JSON as a set of provided parameters.
+        /// </summary>
+        /// <remarks>
+        ///     Solidity functions use ABI types for
+        ///     <see href="https://github.com/tonlabs/TON-Solidity-Compiler/blob/master/API.md#tvmbuilderstore">builder encoding</see>
+        ///     The simplest way to decode such a BOC is to use ABI decoding. <para/>
+        ///     
+        ///     ABI has it own rules for fields layout in cells so manually encoded
+        ///     BOC can not be described in terms of ABI rules.
+        ///     To solve this problem we introduce a new ABI type <see cref="ParamType"/>
+        ///     which allows to store <see cref="ParamType"/> ABI parameter in cell reference and, thus,
+        ///     decode manually encoded BOCs. This type is available only in <see cref="DecodeBoc(ParamsOfDecodeBoc)"/> function
+        ///     and will not be available in ABI messages encoding until it is included into some ABI revision. <para/>
+        ///
+        ///     Such BOC descriptions covers most users needs. If someone wants to decode some BOC which
+        ///     can not be described by these rules (i.e. BOC with TLB containing constructors of flags
+        ///     defining some parsing conditions) then they can decode the fields up to fork condition,
+        ///     check the parsed data manually, expand the parsing schema and then decode the whole BOC
+        ///     with the full schema.
+        /// </remarks>
+        Task<ResultOfDecodeBoc> DecodeBoc(ParamsOfDecodeBoc @params);
+
+        /// <summary>
+        ///     Encodes given parameters in JSON into a BOC using param types from ABI.
+        /// </summary>
+        Task<ResultOfAbiEncodeBoc> EncodeBoc(ParamsOfAbiEncodeBoc @params);
     }
 }

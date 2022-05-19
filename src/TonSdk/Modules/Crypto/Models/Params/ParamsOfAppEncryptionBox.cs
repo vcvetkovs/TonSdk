@@ -2,7 +2,7 @@
 {
 
     /// <summary>
-    ///     Encryption box callbacks.
+    ///     Interface for data encryption/decryption.
     /// </summary>
     public abstract class ParamsOfAppEncryptionBox
     {
