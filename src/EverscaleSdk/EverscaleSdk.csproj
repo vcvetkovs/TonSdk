@@ -5,7 +5,7 @@
 		<Nullable>enable</Nullable>
 		<Version>1.32.0</Version>
 		<Authors>Viktors Cvetkovs</Authors>
-		<Description>TON Client</Description>
+		<Description>Everscale Client</Description>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
 		<RepositoryUrl>https://github.com/vcvetkovs/TonSdk</RepositoryUrl>
 	</PropertyGroup>
