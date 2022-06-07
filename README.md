@@ -1,8 +1,8 @@
-# TON SDK .NET Bindings
+# Everscale SDK .NET Bindings
 
 **Community links:**
 
-[![Chat on Telegram](https://img.shields.io/badge/chat-on%20telegram-9cf.svg)](https://t.me/tonsharp_sdk)
+[![Chat on Telegram](https://img.shields.io/badge/chat-on%20telegram-9cf.svg)](https://t.me/everscale_sdk)
   
 ## Installation
 ### NuGet package
@@ -21,7 +21,7 @@ var cfg = new ClientConfig
         ServerAddress = "net.ton.dev"
     }
 };
-using var client = new TonClient(cfg);
+using var client = new EverscaleClient(cfg);
 var result = await client.Crypto.Sha256(new ParamsOfHash
 {
     Data = "example of sha256"
@@ -38,7 +38,7 @@ var cfg = new ClientConfig
         ServerAddress = "net.ton.dev"
     }
 };
-using var client = new TonClient(cfg);
+using var client = new EverscaleClient(cfg);
 var @params = new ParamsOfSubscribeCollection
 {
     Collection = "transactions",
@@ -59,4 +59,4 @@ await foreach (var item in _sut.SubscribeCollection(@params))
 }
 ```
 
-More of examples you can find [tests](https://github.com/vcvetkovs/TonSdk/tree/main/tests/TonSdk.Tests)
+More of examples you can find [tests](https://github.com/vcvetkovs/TonSdk/tree/main/tests/EverscaleSdk.Tests)
