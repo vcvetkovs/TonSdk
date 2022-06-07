@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using EverscaleSdk.Configs;
 using EverscaleSdk.Modules.Client.Models;
 
 namespace EverscaleSdk.Modules.Client
@@ -34,6 +35,12 @@ namespace EverscaleSdk.Modules.Client
         {
             return _client
                 .CallFunction(Consts.Commands.ResolveAppRequest);
+        }
+
+        public Task<ClientConfig> Config()
+        {
+            return _client
+                .CallFunction<ClientConfig>(Consts.Commands.Config);
         }
     }
 }

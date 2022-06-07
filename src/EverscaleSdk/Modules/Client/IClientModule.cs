@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using EverscaleSdk.Configs;
 using EverscaleSdk.Modules.Client.Models;
 
 namespace EverscaleSdk.Modules.Client
@@ -27,5 +28,10 @@ namespace EverscaleSdk.Modules.Client
         ///     Resolves application request processing result.
         /// </summary>
         Task ResolveAppRequest(ParamsOfResolveAppRequest @params);
+
+        /// <summary>
+        ///     Returns Core Library API reference.
+        /// </summary>
+        Task<ClientConfig> Config();
     }
 }
