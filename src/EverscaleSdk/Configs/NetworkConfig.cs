@@ -8,6 +8,8 @@ namespace EverscaleSdk.Configs
         ///     DApp Server public address.
         /// </summary>
         /// <remarks>
+        ///     <c>This field is deprecated, but left for backward-compatibility.</c>
+        ///     
         ///     For instance, for <c>net.ton.dev/graphql</c> GraphQL endpoint
         ///     the server address will be net.ton.dev
         /// </remarks>
@@ -19,11 +21,12 @@ namespace EverscaleSdk.Configs
         /// <remarks>
         ///     Any correct URL format can be specified, including IP addresses.
         ///     This parameter is prevailing over <see cref="ServerAddress"/>.
+        ///     Check the full list of <a href="https://github.com/tonlabs/ever-sdk/blob/master/docs/reference/ever-os-api/networks.md">supported network endpoints</a>.
         /// </remarks>
         public string[] Endpoints { get; set; }
 
         /// <summary>
-        ///     Deprecated.<para/>
+        ///     Deprecated. <para/>
         ///     
         ///     You must use <see cref="MaxReconnectTimeout"/> that allows to
         ///     specify maximum network resolving timeout.
@@ -52,10 +55,9 @@ namespace EverscaleSdk.Configs
         /// </summary>
         /// <remarks>
         ///     Only for those messages which local emulation was successful or
-        ///     failed with replay protection error.
-        ///  <para/>
+        ///     failed with replay protection error. <para/>
+        ///     
         ///     The default value is 5.
-        ///  <para/>
         /// </remarks>
         public sbyte? MessageRetriesCount { get; set; }
 
@@ -64,11 +66,10 @@ namespace EverscaleSdk.Configs
         ///     contracts which ABI does not include "expire" header.
         /// </summary>
         /// <remarks>
-        ///     Must be specified in milliseconds. Default is 40000 (40 sec).
-        ///  <para/>
+        ///     Must be specified in milliseconds. Default is 40000 (40 sec). <para/>
+        ///  
         ///     If the message is not delivered within the specified timeout
         ///     the appropriate error occurs.
-        ///  <para/>
         /// </remarks>
         public uint? MessageProcessingTimeout { get; set; }
 
@@ -85,13 +86,12 @@ namespace EverscaleSdk.Configs
         /// </summary>
         /// <remarks>
         ///     If client's device time is out of sync and difference is more
-        ///     than the threshold then error will occur.
-        ///  <para/>
+        ///     than the threshold then error will occur. <para/>
+        ///  
         ///     Also an error will occur if the specified threshold is more than
-        ///     <see cref="MessageProcessingTimeout" />/2.
-        ///  <para/>
+        ///     <see cref="MessageProcessingTimeout" />/2. <para/>
+        ///     
         ///     Must be specified in milliseconds. Default is 15000 (15 sec).
-        ///  <para/>
         /// </remarks>
         public uint? OutOfSyncThreshold { get; set; }
 
@@ -100,7 +100,7 @@ namespace EverscaleSdk.Configs
         ///     broadcast a message.
         /// </summary>
         /// <remarks>
-        ///     Default is 2.
+        ///     Default is 1.
         /// </remarks>
         public byte? SendingEndpointCount { get; set; }
 
@@ -109,13 +109,12 @@ namespace EverscaleSdk.Configs
         /// </summary>
         /// <remarks>
         ///     Library periodically checks the current endpoint for blockchain
-        ///     data syncronization latency.
-        ///  <para/>
+        ///     data syncronization latency. <para/>
+        ///     
         ///     If the latency (time-lag) is less then <see cref="MaxLatency"/>
-        ///     then library selects another endpoint.
-        ///  <para/>
+        ///     then library selects another endpoint. <para/>
+        ///     
         ///     Must be specified in milliseconds. Default is 60000 (1 min).
-        ///  <para/>
         /// </remarks>
         public uint? LatencyDetectionInterval { get; set; }
 
@@ -125,13 +124,12 @@ namespace EverscaleSdk.Configs
         /// </summary>
         /// <remarks>
         ///     Library periodically checks the current endpoint
-        ///     for blockchain data synchronization latency.
-        ///  <para/>
+        ///     for blockchain data synchronization latency. para/>
+        ///     
         ///     If the latency (time-lag) is less then <see cref="MaxLatency"/>
-        ///     then library selects another endpoint.
-        ///  <para/>
+        ///     then library selects another endpoint. <para/>
+        ///     
         ///     Must be specified in milliseconds. Default is 60000 (1 min).
-        ///  <para/>
         /// </remarks>
         public uint? MaxLatency { get; set; }
 
@@ -140,10 +138,11 @@ namespace EverscaleSdk.Configs
         /// </summary>
         /// <remarks>
         ///     Is is used when no timeout specified for the request to limit
-        ///     the answer waiting time.
-        ///  <para/>
-        ///     If no answer received during the timeout requests ends with error.
-        ///  <para/>
+        ///     the answer waiting time. <para/>
+        ///     
+        ///     If no answer received during the timeout requests ends with
+        ///     error. <para/>
+        ///     
         ///     Must be specified in milliseconds. Default is 60000 (1 min).
         ///  <para/>
         /// </remarks>
@@ -156,6 +155,26 @@ namespace EverscaleSdk.Configs
         ///     Default is <c>HTTP</c>
         /// </remarks>
         public NetworkQueriesProtocol QueriesProtocol { get; set; }
+
+        /// <summary>
+        ///     UNSTABLE. <para/>
+        ///     
+        ///     First REMP status awaiting timeout. If no status recieved during
+        ///     the timeout than fallback transaction scenario is activated. <para/>
+        ///     
+        ///     Must be specified in milliseconds. Default is 1000 (1 sec).
+        /// </summary>
+        public uint? FirstRempStatusTimeout { get; set; }
+
+        /// <summary>
+        ///     UNSTABLE. <para/>
+        ///     
+        ///     Subsequent REMP status awaiting timeout. If no status recieved
+        ///     during the timeout than fallback transaction scenario is activated. <para/>
+        ///     
+        ///     Must be specified in milliseconds. Default is 5000 (5 sec).
+        /// </summary>
+        public uint? NextRempStatusTimeout { get; set; }
 
         /// <summary>
         ///     Access key to GraphQL API.

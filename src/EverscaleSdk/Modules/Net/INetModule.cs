@@ -212,11 +212,16 @@ namespace EverscaleSdk.Modules.Net
         Task<ResultOfGetEndpoints> GetEndpoints();
 
         /// <summary>
-        ///     *Attention* this query retrieves data from 'Counterparties' service which is not supported in
-        ///     the opensource version of DApp Server (and will not be supported) as well as in TON OS SE (will be
-        ///     supported in SE in future),
-        ///     but is always accessible via [TON OS Devnet/Mainnet
-        ///     Clouds](https://docs.ton.dev/86757ecb2/p/85c869-networks)
+        ///     Allows to query and paginate through the list of accounts that
+        ///     the specified account has interacted with, sorted by the time of
+        ///     the last internal message between accounts. <para />
+        ///     
+        ///     <c>Attention</c> this query retrieves data from 'Counterparties'
+        ///     service which is not supported in the opensource version of DApp
+        ///     Server (and will not be supported) as well as in Evernode SE
+        ///     (will be supported in SE in future), but is always accessible
+        ///     via <a href="https://docs.ton.dev/86757ecb2/p/85c869-networks">
+        ///     EVER OS Clouds</a>
         /// </summary>
         Task<ResultOfQueryCollection> QueryCounterparties(ParamsOfQueryCounterparties @params);
 

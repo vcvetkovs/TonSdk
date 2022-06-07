@@ -71,6 +71,7 @@ namespace EverscaleSdk
             Boc = bocModule ?? new BocModule(this);
             Client = clientModule ?? new ClientModule(this);
             Crypto = cryptoModule ?? new CryptoModule(this);
+            Debot = debotModule ?? new DebotModule(this);
             Net = netModule ?? new NetModule(this);
             Processing = processingModule ?? new ProcessingModule(this);
             Tvm = tvmModule ?? new TvmModule(this);

@@ -135,14 +135,19 @@ namespace EverscaleSdk.Modules.Processing.Models
         ///     Notifies the app that the next block can't be fetched.
         /// </summary>
         /// <remarks>
-        ///     If no block was fetched within <see cref="Configs.NetworkConfig.WaitForTimeout"/> then processing stops.
-        ///     This may happen when the shard stops, or there are other network issues. <para />
+        ///     If no block was fetched within
+        ///     <see cref="Configs.NetworkConfig.WaitForTimeout"/>
+        ///     then processing stops.
+        ///     This may happen when the shard stops, or there are other network
+        ///     issues. <para />
         ///     
         ///     In this case Developer should resume message processing with
         ///     <see cref="IProcessingModule.WaitForTransaction"/>, passing
         ///     shard_block_id, message and contract abi to it.
-        ///     Note that passing ABI is crucial, because it will influence the processing strategy.
-        ///     Another way to tune this is to specify long timeout in <see cref="Configs.NetworkConfig.WaitForTimeout"/>.
+        ///     Note that passing ABI is crucial, because it will influence the
+        ///     processing strategy.
+        ///     Another way to tune this is to specify long timeout in
+        ///     <see cref="Configs.NetworkConfig.WaitForTimeout"/>.
         /// </remarks>
         public class FetchNextBlockFailed : ProcessingEvent
         {
@@ -159,15 +164,19 @@ namespace EverscaleSdk.Modules.Processing.Models
         ///     Notifies the app that the message was not executed within expire
         ///     timeout on-chain and will never be because it is already expired. <para/>
         ///     
-        ///     The expiration timeout can be configured with <see cref="Configs.AbiConfig"/> parameters. <para/>
+        ///     The expiration timeout can be configured with
+        ///     <see cref="Configs.AbiConfig"/> parameters. <para/>
         ///     
-        ///     This event occurs only for the contracts which ABI includes "expire" header.
+        ///     This event occurs only for the contracts which ABI includes
+        ///     "expire" header.
         /// </summary>
         /// <remarks>
-        ///     If Application specifies <see cref="Configs.NetworkConfig.MessageRetriesCount"/> > 0,
-        ///     then <see cref="IProcessingModule.ProcessMessage(ParamsOfProcessMessage)"/>
-        ///     will perform retries: will create a new message and send it again and repeat 
-        ///     it untill it reaches the maximum retries count or receives a successful result. 
+        ///     If Application specifies
+        ///     <see cref="Configs.NetworkConfig.MessageRetriesCount"/> > 0, then
+        ///     <see cref="IProcessingModule.ProcessMessage(ParamsOfProcessMessage)"/>
+        ///     will perform retries: will create a new message and send it
+        ///     again and repeat it untill it reaches the maximum retries count
+        ///     or receives a successful result. 
         ///     All the processing events will be repeated.
         /// </remarks>
         public class MessageExpired : ProcessingEvent
@@ -176,6 +185,68 @@ namespace EverscaleSdk.Modules.Processing.Models
 
             public string Message { get; set; }
 
+            public ClientError Error { get; set; }
+        }
+
+        /// <summary>
+        ///     Notifies the app that the message has been delivered to the
+        ///     thread's validators.
+        /// </summary>
+        public class RempSentToValidators : ProcessingEvent
+        {
+            public string MessageId { get; set; }
+
+            public ulong Timestamp { get; set; }
+
+            public dynamic? Json { get; set; }
+        }
+
+        /// <summary>
+        ///     Notifies the app that the message has been successfully included
+        ///     into a block candidate by the thread's collator.
+        /// </summary>
+        public class RempIncludedIntoBlock : ProcessingEvent
+        {
+            public string MessageId { get; set; }
+
+            public ulong Timestamp { get; set; }
+
+            public dynamic? Json { get; set; }
+        }
+
+        /// <summary>
+        ///     Notifies the app that the block candicate with the message has
+        ///     been accepted by the thread's validators.
+        /// </summary>
+        public class RempIncludedIntoAcceptedBlock : ProcessingEvent
+        {
+            public string MessageId { get; set; }
+
+            public ulong Timestamp { get; set; }
+
+            public dynamic? Json { get; set; }
+        }
+
+        /// <summary>
+        ///     Notifies the app about some other minor REMP statuses occurring
+        ///     during message processing.
+        /// </summary>
+        public class RempOther : ProcessingEvent
+        {
+            public string MessageId { get; set; }
+
+            public ulong Timestamp { get; set; }
+
+            public dynamic? Json { get; set; }
+        }
+
+        /// <summary>
+        ///     Notifies the app about any problem that has occured in REMP
+        ///     processing - in this case library switches to the fallback
+        ///     transaction awaiting scenario (sequential block reading).
+        /// </summary>
+        public class RempError : ProcessingEvent
+        {
             public ClientError Error { get; set; }
         }
     }

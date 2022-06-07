@@ -19,5 +19,8 @@ namespace EverscaleSdk.Modules.Processing.Enums
         BlockNotFound = 511,
         InvalidData = 512,
         ExternalSignerMustNotBeUsed = 513,
+        MessageRejected = 514,
+        InvalidRempStatus = 515,
+        NextRempStatusTimeout = 516,
     }
 }
