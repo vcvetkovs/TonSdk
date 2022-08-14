@@ -41,5 +41,18 @@
         ///  <para/>
         /// </remarks>
         public byte? ProcessingTryIndex { get; set; }
+
+
+        /// <summary>
+        ///     Destination address of the message.
+        /// </summary>
+        /// <remarks>
+        ///     Since ABI version 2.3 destination address of external
+        ///     inbound message is used in message body signature
+        ///     calculation.
+        ///     Should be provided when signed external inbound message
+        ///     body is created. Otherwise can be omitted.
+        /// </remarks>
+        public string Address { get; set; }
     }
 }
