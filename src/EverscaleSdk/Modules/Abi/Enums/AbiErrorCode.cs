@@ -16,5 +16,6 @@
         InvalidFunctionId = 312,
         InvalidData = 313,
         EncodeInitialDataFailed = 314,
+        InvalidFunctionName = 315,
     }
 }

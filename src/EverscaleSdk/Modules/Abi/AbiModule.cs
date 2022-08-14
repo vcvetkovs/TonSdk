@@ -26,16 +26,31 @@ namespace EverscaleSdk.Modules.Abi
                 .CallFunction<ResultOfAttachSignatureToMessageBody>(Consts.Commands.AttachSignatureToMessageBody, @params);
         }
 
-        public Task<ResultOfDecodeAccountData> DecodeAccountData(ParamsOfDecodeAccountData @params)
+        public Task<ResultOfCalcFunctionId> CalcFunctionId(
+            ParamsOfCalcFunctionId @params)
         {
             return _client
-                .CallFunction<ResultOfDecodeAccountData>(Consts.Commands.DecodeAccountData, @params);
+                .CallFunction<ResultOfCalcFunctionId>(
+                    Consts.Commands.CalcFunctionId,
+                    @params);
         }
 
-        public Task<DecodedMessageBody> DecodeMessage(ParamsOfDecodeMessage @params)
+        public Task<ResultOfDecodeAccountData> DecodeAccountData(
+            ParamsOfDecodeAccountData @params)
         {
             return _client
-                .CallFunction<DecodedMessageBody>(Consts.Commands.DecodeMessage, @params);
+                .CallFunction<ResultOfDecodeAccountData>(
+                    Consts.Commands.DecodeAccountData,
+                    @params);
+        }
+
+        public Task<DecodedMessageBody> DecodeMessage(
+            ParamsOfDecodeMessage @params)
+        {
+            return _client
+                .CallFunction<DecodedMessageBody>(
+                    Consts.Commands.DecodeMessage,
+                    @params);
         }
 
         public Task<DecodedMessageBody> DecodeMessageBody(ParamsOfDecodeMessageBody @params)

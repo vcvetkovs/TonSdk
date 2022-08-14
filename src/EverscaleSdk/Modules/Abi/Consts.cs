@@ -6,6 +6,7 @@
         {
             public const string AttachSignature = "abi.attach_signature";
             public const string AttachSignatureToMessageBody = "abi.attach_signature_to_message_body";
+            public const string CalcFunctionId = "abi.calc_function_id";
             public const string DecodeAccountData = "abi.decode_account_data";
             public const string DecodeMessage = "abi.decode_message";
             public const string DecodeMessageBody = "abi.decode_message_body";

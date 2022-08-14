@@ -21,5 +21,14 @@
         ///     Transaction logical time.
         /// </summary>
         public ulong? TransactionLt { get; set; }
+
+        /// <summary>
+        ///     Overrides standard TVM behaviour.
+        /// </summary>
+        /// <remarks>
+        ///     If set to <see langword="true"/>
+        ///     then CHKSIG always will return <see langword="true"/>.
+        /// </remarks>
+        public bool? ChksigAlwaysSucceed { get; set; }
     }
 }

@@ -21,6 +21,12 @@ namespace EverscaleSdk.Modules.Abi
             ParamsOfAttachSignatureToMessageBody @params);
 
         /// <summary>
+        ///     Calculates contract function ID by contract ABI.
+        /// </summary>
+        Task<ResultOfCalcFunctionId> CalcFunctionId(
+            ParamsOfCalcFunctionId @params);
+
+        /// <summary>
         ///     Note: this feature requires ABI 2.1 or higher.
         /// </summary>
         Task<ResultOfDecodeAccountData> DecodeAccountData(ParamsOfDecodeAccountData @params);
