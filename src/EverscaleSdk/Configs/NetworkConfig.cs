@@ -180,7 +180,7 @@ namespace EverscaleSdk.Configs
         ///     Access key to GraphQL API.
         /// </summary>
         /// <remarks>
-        ///     At the moment is not used in production.
+        ///     You can specify here Evercloud project secret ot serialized JWT.
         /// </remarks>
         public string? AccessKey { get; set; }
     }
